@@ -1,19 +1,8 @@
 {
-    "domains": [
-        {
-            "name": "example.com",
-            "associated": [
-                "subdomain1.example.com",
-                "subdomain2.example.com",
-                "api.example.com"
-            ]
-        },
-        {
-            "name": "site.org",
-            "associated": [
-                "mail.site.org",
-                "cdn.site.org"
-            ]
-        }
+  "domains": {
+    "spankbang.com": [
+      "sb-cd.com",
+      "*.sb-cd.com"
     ]
+  }
 }
