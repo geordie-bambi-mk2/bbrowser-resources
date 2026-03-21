@@ -590,6 +590,47 @@
     }
     .mock-icon-btn.remove { color: #7030a0; }
 
+    /* fake preset items (mirrors Suggested Sites UI) */
+    .mock-preset-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #110a13;
+      border: 1px solid #2e1a3e;
+      border-radius: 6px;
+      padding: 6px 10px;
+      gap: 8px;
+    }
+    .mock-preset-name {
+      font-size: 0.8rem;
+      color: #c892d4;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .mock-preset-add {
+      background: #2a0a35;
+      border: 1px solid #6030a0;
+      color: #c070f0;
+      border-radius: 5px;
+      padding: 2px 9px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      cursor: default;
+      flex-shrink: 0;
+    }
+    .mock-preset-added {
+      background: #1a1020;
+      border: 1px solid #2e1a3e;
+      color: #50d050;
+      border-radius: 5px;
+      padding: 2px 9px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
     /* fake select */
     .mock-select {
       width: 100%;
@@ -1372,6 +1413,60 @@
       <div class="feature-body">
 
         <div class="ui-item">
+          <div class="ui-item-label">Suggested Sites section</div>
+          <div class="ui-item-name" style="margin-bottom:10px">One-click preset domains</div>
+          <div class="mock-domain-list">
+            <div class="mock-preset-item">
+              <span class="mock-preset-name">HypnoTube <span class="badge-auto">AUTO</span></span>
+              <span class="mock-preset-added">&#10003;</span>
+            </div>
+            <div class="mock-preset-item">
+              <span class="mock-preset-name">Pornhub <span class="badge-manual">MANUAL</span></span>
+              <span class="mock-preset-add">+</span>
+            </div>
+            <div class="mock-preset-item">
+              <span class="mock-preset-name">xVideos <span class="badge-manual">MANUAL</span></span>
+              <span class="mock-preset-add">+</span>
+            </div>
+            <div class="mock-preset-item">
+              <span class="mock-preset-name">SpankBang <span class="badge-manual">MANUAL</span></span>
+              <span class="mock-preset-add">+</span>
+            </div>
+          </div>
+          <div class="ui-item-desc">
+            The <strong style="color:var(--text)">Suggested Sites</strong> panel at the top of the Domains tab shows
+            popular sites pre-configured from the remote config file — each with the correct mode badge and CDN
+            subdomains already wired in. Click <strong style="color:var(--text)">+</strong> to add any preset to your
+            active domains in one click. Sites you've already added show a <strong style="color:var(--green)">&#10003;</strong> instead.<br><br>
+            Current presets: <strong style="color:var(--text)">HypnoTube</strong> (AUTO),
+            <strong style="color:var(--text)">Pornhub</strong>,
+            <strong style="color:var(--text)">xVideos</strong>,
+            <strong style="color:var(--text)">xHamster</strong>,
+            <strong style="color:var(--text)">XNXX</strong>,
+            <strong style="color:var(--text)">SpankBang</strong>,
+            <strong style="color:var(--text)">RedTube</strong>,
+            <strong style="color:var(--text)">YouPorn</strong>,
+            <strong style="color:var(--text)">EPorner</strong>.
+          </div>
+        </div>
+
+        <div class="ui-item">
+          <div class="ui-item-label">Ignored paths (preset domains)</div>
+          <div class="ui-item-name" style="margin-bottom:8px">Automatic suppression on non-video pages</div>
+          <div class="ui-item-desc">
+            Each preset carries a list of <em>ignored paths</em> — URL prefixes where Bambi Mode stays silent even
+            though the domain is active. This prevents the extension from triggering on category indexes, search
+            results, pornstar listings, and similar browse/discovery pages.<br><br>
+            For example, on Pornhub the extension is suppressed on <code>/categories</code>, <code>/pornstars</code>,
+            <code>/search</code>, <code>/channels</code>, and more. On SpankBang it skips <code>/tags</code>,
+            <code>/channels</code>, <code>/pornstars</code>, <code>/gifs</code>, and <code>/pics</code>.<br><br>
+            You don't need to manage this manually — it's applied automatically from the remote config whenever a
+            preset is active. The <strong style="color:var(--text)">Blacklist</strong> tab is still available for
+            any extra URL patterns you want to suppress on a per-case basis.
+          </div>
+        </div>
+
+        <div class="ui-item">
           <div class="ui-item-label">Domain modes</div>
           <div class="ui-item-name" style="margin-bottom:10px">AUTO vs MANUAL</div>
           <div class="mock-domain-list">
@@ -1540,7 +1635,7 @@
             <div class="step-num">1</div>
             <div class="step-body">
               <div class="step-title">Page loads</div>
-              <div class="step-desc">The extension detects the domain matches and checks whether the current URL is blacklisted.</div>
+              <div class="step-desc">The extension detects the domain matches, checks whether the current URL is blacklisted, and checks whether the path falls in that domain's ignored-paths list (e.g. category indexes or search pages). If any check fails, the page is left alone.</div>
             </div>
           </div>
           <div class="step">
@@ -1629,7 +1724,7 @@
     Extended by <a href="https://github.com/geordie-bambi-mk2" target="_blank">geordie-bambi-mk2</a>
   </div>
   <div style="margin-top:4px;font-size:0.66rem;color:#3a1a3a">
-    This guide covers extension version 5.1 · Popup tabs: General · Domains · Manual · Blacklist
+    This guide covers extension version 5.1 · Popup tabs: General · Domains (Suggested Sites + Active Domains) · Manual · Blacklist
   </div>
 </footer>
 
