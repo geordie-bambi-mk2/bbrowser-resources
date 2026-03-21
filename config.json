@@ -1,8 +1,89 @@
 {
+  "version": 1,
   "domains": {
-    "spankbang.com": [
-      "sb-cd.com",
-      "*.sb-cd.com"
-    ]
-  }
+    "pornhub.com":   ["ev.phncdn.com"],
+    "xhamster.com":  ["xhcdn.com"],
+    "xvideos.com":   ["xvideos-cdn.com"],
+    "xnxx.com":      ["xnxx-cdn.com"],
+    "spankbang.com": ["sb-cd.com"],
+    "redtube.com":   ["rdtcdn.com"]
+  },
+  "presets": [
+    {
+      "id": "hypnotube",
+      "label": "HypnoTube",
+      "domain": "hypnotube.com",
+      "subdomains": ["media.hypnotube.com", "cdn.hypnotube.com"],
+      "mode": "auto",
+      "ignorePaths": ["/search", "/categories", "/tags"]
+    },
+    {
+      "id": "pornhub",
+      "label": "Pornhub",
+      "domain": "pornhub.com",
+      "subdomains": ["ev.phncdn.com"],
+      "mode": "manual",
+      "ignorePaths": [
+        "/categories", "/pornstars", "/search", "/community",
+        "/channels", "/model", "/user", "/albums", "/playlists",
+        "/login", "/signup", "/premium"
+      ]
+    },
+    {
+      "id": "xvideos",
+      "label": "xVideos",
+      "domain": "xvideos.com",
+      "subdomains": ["xvideos-cdn.com"],
+      "mode": "manual",
+      "ignorePaths": ["/channels-index", "/pornstars-index", "/profileslist", "/search/"]
+    },
+    {
+      "id": "xhamster",
+      "label": "xHamster",
+      "domain": "xhamster.com",
+      "subdomains": ["xhcdn.com"],
+      "mode": "manual",
+      "ignorePaths": ["/categories", "/pornstars", "/channels", "/photos", "/creators", "/dating", "/my/"]
+    },
+    {
+      "id": "xnxx",
+      "label": "XNXX",
+      "domain": "xnxx.com",
+      "subdomains": ["xnxx-cdn.com"],
+      "mode": "manual",
+      "ignorePaths": ["/search/"]
+    },
+    {
+      "id": "spankbang",
+      "label": "SpankBang",
+      "domain": "spankbang.com",
+      "subdomains": ["sb-cd.com"],
+      "mode": "manual",
+      "ignorePaths": ["/tags", "/channels", "/pornstars", "/pornstars_alphabet", "/creators", "/pics", "/gifs", "/info"]
+    },
+    {
+      "id": "redtube",
+      "label": "RedTube",
+      "domain": "redtube.com",
+      "subdomains": ["rdtcdn.com"],
+      "mode": "manual",
+      "ignorePaths": ["/categories", "/pornstars", "/playlists", "/tags"]
+    },
+    {
+      "id": "youporn",
+      "label": "YouPorn",
+      "domain": "youporn.com",
+      "subdomains": [],
+      "mode": "manual",
+      "ignorePaths": ["/categories", "/pornstar", "/tags", "/channels", "/search", "/playlists"]
+    },
+    {
+      "id": "eporner",
+      "label": "EPorner",
+      "domain": "eporner.com",
+      "subdomains": [],
+      "mode": "manual",
+      "ignorePaths": ["/categories/", "/pornstars/", "/studios/", "/tags/", "/search/"]
+    }
+  ]
 }
