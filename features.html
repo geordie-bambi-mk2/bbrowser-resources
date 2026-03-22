@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BambiBrowser+ — Feature Guide</title>
+  <style>
+    /* ── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:           #120812;
+      --bg-card:      #1c0b1f;
+      --bg-card-dark: #130813;
+      --bg-inset:     #1e0a1e;
+      --border:       #2e0e2e;
+      --border-md:    #3e183e;
+      --text:         #eec8ee;
+      --text-muted:   #8a61a3;
+      --text-dim:     #5a3060;
+      --accent:       #ff9bff;
+      --accent-2:     #ff80ff;
+      --section-ttl:  #9450ad;
+      --purple-mid:   #6e1a85;
+      --purple-deep:  #5a0a70;
+      --h-from:       #3d0a3d;
+      --h-to:         #5a1060;
+      --green:        #50d050;
+      --orange:       #ff9800;
+      --red:          #cc3030;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; line-height: 1.65; }
+
+    /* ── NAV ─────────────────────────────────────────────── */
+    .site-nav {
+      position: sticky; top: 0; z-index: 999;
+      background: var(--bg-card-dark); border-bottom: 1px solid var(--border);
+      display: flex; align-items: center;
+      padding: 0 clamp(12px, 5vw, calc(50% - 430px)); gap: 0;
+    }
+    .nav-brand {
+      display: flex; align-items: center; gap: 8px;
+      padding: 11px 24px 11px 0; text-decoration: none;
+      color: var(--accent); font-size: 0.88rem; font-weight: 700;
+      letter-spacing: 0.5px; white-space: nowrap;
+      border-right: 1px solid var(--border); margin-right: 16px;
+    }
+    .nav-brand svg { width: 20px; height: 20px; flex-shrink: 0; }
+    .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
+    .nav-links a {
+      color: var(--text-muted); text-decoration: none;
+      font-size: 0.76rem; font-weight: 600; letter-spacing: 0.3px;
+      padding: 8px 11px; border-radius: 6px;
+      transition: background 0.18s, color 0.18s;
+    }
+    .nav-links a:hover { background: #26102a; color: var(--text); }
+
+    /* ── HERO ─────────────────────────────────────────────── */
+    .hero {
+      padding: 64px clamp(16px, 5vw, 80px) 52px; text-align: center;
+      background: linear-gradient(160deg, var(--h-from) 0%, var(--h-to) 55%, #1a0428 100%);
+      border-bottom: 1px solid #6d1f83;
+    }
+    .hero-svg { width: 76px; height: 76px; margin-bottom: 20px; filter: drop-shadow(0 0 18px #c050e080); }
+    .hero h1 { font-size: clamp(1.5rem, 4vw, 2.1rem); font-weight: 700; color: var(--accent); letter-spacing: 1px; margin-bottom: 12px; }
+    .hero-ver {
+      display: inline-block;
+      background: rgba(180, 60, 220, 0.2); border: 1px solid #9040b0;
+      color: #c892d4; font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.9px; padding: 3px 12px; border-radius: 20px;
+      margin-bottom: 18px; text-transform: uppercase;
+    }
+    .hero p { color: #c892d4; font-size: 0.96rem; max-width: 520px; margin: 0 auto 28px; }
+    .hero-steps { display: flex; justify-content: center; gap: 0; flex-wrap: wrap; max-width: 600px; margin: 0 auto; }
+    .hero-step { display: flex; align-items: center; gap: 8px; padding: 7px 16px; color: #b07abf; font-size: 0.78rem; font-weight: 600; }
+    .hero-step-num {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: rgba(110, 26, 133, 0.6); border: 1px solid #9040b0;
+      color: var(--accent-2); font-size: 0.68rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .hero-step-arrow { color: var(--text-dim); font-size: 0.7rem; padding: 0 2px; }
+
+    /* ── LAYOUT ──────────────────────────────────────────── */
+    .container { max-width: 860px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
+    .page-section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+    .page-section:last-of-type { border-bottom: none; }
+    .section-eyebrow {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.62rem; text-transform: uppercase; letter-spacing: 1.6px;
+      color: var(--section-ttl); font-weight: 700; margin-bottom: 10px;
+    }
+    .section-eyebrow::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .section-h2 { font-size: 1.35rem; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+    .section-lead { font-size: 0.88rem; color: var(--text-muted); max-width: 640px; margin-bottom: 32px; }
+
+    /* ── STEP LIST ────────────────────────────────────────── */
+    .steps { display: flex; flex-direction: column; gap: 18px; }
+    .step { display: flex; gap: 16px; align-items: flex-start; }
+    .step-num {
+      width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%;
+      background: linear-gradient(135deg, var(--h-from), var(--purple-mid));
+      border: 1px solid #9040b0; color: var(--accent-2); font-size: 0.78rem;
+      font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 1px;
+    }
+    .step-body { flex: 1; padding-top: 4px; }
+    .step-title { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .step-desc { font-size: 0.83rem; color: var(--text-muted); line-height: 1.55; }
+
+    /* ── INLINE CODE / PATH ───────────────────────────────── */
+    code {
+      background: var(--bg-inset); border: 1px solid var(--border-md);
+      color: var(--accent-2); font-family: 'Cascadia Code', 'Consolas', monospace;
+      font-size: 0.82em; padding: 1px 7px; border-radius: 4px;
+    }
+    kbd {
+      display: inline-block; background: var(--bg-inset);
+      border: 1px solid #5a2a5a; border-bottom: 2px solid #3a1a3a;
+      color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif;
+      font-size: 0.75rem; font-weight: 700; padding: 1px 8px; border-radius: 4px;
+    }
+
+    /* ── CALLOUTS ─────────────────────────────────────────── */
+    .callout {
+      display: flex; gap: 12px; background: var(--bg-card);
+      border: 1px solid var(--border-md); border-left: 3px solid var(--purple-mid);
+      border-radius: 8px; padding: 14px 16px; margin: 16px 0;
+      font-size: 0.82rem; color: var(--text-muted); line-height: 1.5;
+    }
+    .callout-icon { font-size: 1rem; flex-shrink: 0; line-height: 1.5; }
+    .callout.good { border-left-color: var(--green); }
+    .callout.warn { border-left-color: var(--orange); }
+    .callout.info { border-left-color: #5060cc; }
+    .callout strong { color: var(--text); }
+
+    /* ── BROWSER INSTALLER TABS ───────────────────────────── */
+    .browser-tabs { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: -1px; }
+    .btab-btn {
+      background: var(--bg-card); border: 1px solid var(--border-md);
+      border-bottom: 2px solid transparent; border-radius: 8px 8px 0 0;
+      color: var(--text-muted); font-size: 0.77rem; font-weight: 700;
+      letter-spacing: 0.3px; padding: 8px 20px; cursor: pointer;
+      transition: background 0.18s, color 0.18s;
+    }
+    .btab-btn:hover { background: #26102a; color: var(--text); }
+    .btab-btn.active { background: var(--purple-mid); color: #ffd8ff; border-color: #b73ad8; border-bottom-color: var(--bg-card); }
+    .btab-panels {
+      background: var(--bg-card); border: 1px solid #b73ad8;
+      border-radius: 0 8px 8px 8px; padding: 28px 24px; position: relative; z-index: 1;
+    }
+    .btab-pane { display: none; }
+    .btab-pane.active { display: block; }
+    .browser-url {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #0d0510; border: 1px solid #3a1050; border-radius: 20px;
+      padding: 6px 16px; font-size: 0.82rem; color: var(--accent-2);
+      font-family: 'Cascadia Code', 'Consolas', monospace; margin-bottom: 20px;
+    }
+    .browser-url-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--purple-mid); }
+    .browser-note {
+      background: var(--bg-inset); border: 1px solid var(--border-md);
+      border-radius: 6px; padding: 8px 12px; font-size: 0.76rem;
+      color: #7e4f88; margin-top: 14px; line-height: 1.5;
+    }
+    .dev-mode-box {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      background: #110a13; border: 1px dashed #4a1b55; border-radius: 8px;
+      padding: 12px 16px; margin: 14px 0;
+    }
+    .dev-mode-label { font-size: 0.82rem; color: var(--text); font-weight: 600; }
+    .dev-mode-where { font-size: 0.72rem; color: var(--text-muted); }
+    .mini-pill {
+      background: rgba(110, 26, 133, 0.4); border: 1px solid #8030a0;
+      border-radius: 20px; color: var(--accent); font-size: 0.7rem;
+      font-weight: 700; padding: 3px 10px; white-space: nowrap;
+    }
+
+    /* ── PLAYER CARDS ─────────────────────────────────────── */
+    .player-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .player-cards { grid-template-columns: 1fr; } }
+    .player-card { background: var(--bg-card); border: 1px solid var(--border-md); border-radius: 10px; overflow: hidden; }
+    .player-card-head { background: linear-gradient(90deg, #260a2e, #1c0b1f); border-bottom: 1px solid var(--border); padding: 13px 18px; }
+    .player-card-head-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1.2px; color: var(--section-ttl); font-weight: 700; margin-bottom: 3px; }
+    .player-card-head-title { font-size: 0.92rem; font-weight: 700; color: var(--text); }
+    .player-card-body { padding: 18px; }
+    .tray-demo {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: #1e1e1e; border: 1px solid #444; border-radius: 4px;
+      padding: 5px 10px; font-size: 0.78rem; color: #ccc;
+      font-family: 'Segoe UI', Tahoma, sans-serif; margin: 10px 0;
+    }
+    .tray-demo svg { width: 14px; height: 14px; }
+
+    /* ── BOOT GRID ────────────────────────────────────────── */
+    .boot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 600px) { .boot-grid { grid-template-columns: 1fr; } }
+    .boot-card { background: var(--bg-card); border: 1px solid var(--border-md); border-radius: 10px; overflow: hidden; }
+    .boot-card-head {
+      background: linear-gradient(90deg, #260a2e, #1c0b1f); border-bottom: 1px solid var(--border);
+      padding: 14px 20px; display: flex; align-items: center; gap: 10px;
+    }
+    .boot-badge {
+      background: var(--purple-deep); border: 1px solid #9040b0; color: var(--accent);
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; padding: 2px 8px; border-radius: 3px;
+    }
+    .boot-card-title { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .boot-card-body { padding: 20px; }
+    .boot-card-desc { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 14px; line-height: 1.5; }
+
+    /* ── FEATURE BLOCKS ───────────────────────────────────── */
+    .feature-block {
+      background: var(--bg-card); border: 1px solid var(--border-md);
+      border-radius: 10px; overflow: hidden; margin-bottom: 22px;
+    }
+    .feature-head {
+      background: linear-gradient(90deg, #260a2e, #1c0b1f); border-bottom: 1px solid var(--border);
+      padding: 14px 20px; display: flex; align-items: center; gap: 10px;
+    }
+    .feature-badge {
+      background: var(--purple-deep); border: 1px solid #9040b0; color: var(--accent);
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.8px;
+      text-transform: uppercase; padding: 2px 8px; border-radius: 3px; flex-shrink: 0;
+    }
+    .feature-badge.new { background: rgba(80,208,80,0.18); border-color: #50d050; color: #50d050; }
+    .feature-title { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+    .feature-body { padding: 20px; display: flex; flex-direction: column; gap: 16px; }
+
+    .ui-item { background: var(--bg-inset); border: 1px solid var(--border-md); border-radius: 7px; padding: 12px 16px; }
+    .ui-item-top {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; flex-wrap: wrap; margin-bottom: 8px;
+    }
+    .ui-item-label { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 1.1px; color: var(--text-dim); font-weight: 700; margin-bottom: 2px; }
+    .ui-item-name { font-size: 0.85rem; font-weight: 700; color: var(--text); }
+    .ui-item-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+
+    .mini-toggle { width: 44px; height: 22px; border-radius: 22px; position: relative; flex-shrink: 0; }
+    .mini-toggle.on { background: #8010a0; border: 1px solid #cc40cc; }
+    .mini-toggle.on::after { content: ''; position: absolute; width: 16px; height: 16px; border-radius: 50%; background: #ff80ff; top: 2px; right: 3px; }
+    .mini-toggle.off { background: #3a183a; border: 1px solid #5a2a5a; }
+    .mini-toggle.off::after { content: ''; position: absolute; width: 16px; height: 16px; border-radius: 50%; background: #7a3a7a; top: 2px; left: 3px; }
+
+    .badge-auto { display: inline-block; background: rgba(80,208,80,0.2); color: var(--green); border: 1px solid var(--green); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 3px; }
+    .badge-manual { display: inline-block; background: rgba(255,152,0,0.2); color: var(--orange); border: 1px solid var(--orange); font-size: 0.6rem; font-weight: 700; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 3px; }
+    .badge-new { display: inline-block; background: rgba(80,208,80,0.18); color: #50d050; border: 1px solid #50d050; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.5px; padding: 2px 7px; border-radius: 3px; }
+
+    .dot-online { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--green); box-shadow: 0 0 7px var(--green); vertical-align: middle; }
+    .dot-offline { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: var(--red); vertical-align: middle; }
+
+    .mock-domain-list { display: flex; flex-direction: column; gap: 6px; margin: 10px 0; }
+    .mock-domain-item { display: flex; align-items: center; justify-content: space-between; background: #110a13; border: 1px solid #3e183e; border-radius: 6px; padding: 7px 12px; gap: 8px; }
+    .mock-domain-name { font-size: 0.82rem; color: #dda0dd; flex: 1; display: flex; align-items: center; gap: 8px; }
+    .mock-domain-actions { display: flex; align-items: center; gap: 6px; }
+    .mock-icon-btn { background: none; border: none; cursor: default; font-size: 0.9rem; color: #8f72d0; padding: 0 2px; }
+    .mock-icon-btn.remove { color: #7030a0; }
+
+    .mock-preset-item { display: flex; align-items: center; justify-content: space-between; background: #110a13; border: 1px solid #2e1a3e; border-radius: 6px; padding: 6px 10px; gap: 8px; }
+    .mock-preset-name { font-size: 0.8rem; color: #c892d4; flex: 1; display: flex; align-items: center; gap: 6px; }
+    .mock-preset-add { background: #2a0a35; border: 1px solid #6030a0; color: #c070f0; border-radius: 5px; padding: 2px 9px; font-size: 0.72rem; font-weight: 700; cursor: default; flex-shrink: 0; }
+    .mock-preset-added { background: #1a1020; border: 1px solid #2e1a3e; color: #50d050; border-radius: 5px; padding: 2px 9px; font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .mock-select {
+      width: 100%; background: var(--bg-inset); border: 1px solid #4a2050;
+      border-radius: 6px; padding: 7px 10px; color: var(--text);
+      font-size: 0.82rem; font-family: 'Segoe UI', Tahoma, sans-serif;
+      outline: none; margin-top: 6px; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%239450ad'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center;
+    }
+
+    /* popup demo */
+    .popup-demo { width: 260px; background: var(--bg); border: 1px solid var(--border-md); border-radius: 10px; overflow: hidden; flex-shrink: 0; box-shadow: 0 10px 40px rgba(0,0,0,0.7); font-size: 0; }
+    .popup-demo * { font-family: 'Segoe UI', Tahoma, sans-serif; }
+    .pd-header { background: linear-gradient(135deg, #3d0a3d, #5a1060); padding: 10px 12px; display: flex; align-items: center; gap: 8px; border-bottom: 1px solid #6d1f83; }
+    .pd-icon { width: 16px; height: 16px; }
+    .pd-h-title { font-size: 0.84rem; font-weight: 700; color: #ff9bff; letter-spacing: 0.4px; }
+    .pd-h-ver { margin-left: auto; font-size: 0.62rem; color: #bb7fc9; }
+    .pd-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; padding: 7px; background: #130813; border-bottom: 1px solid #2e0e2e; }
+    .pd-tab { border: 1px solid #4a1b55; border-radius: 5px; background: #1c0b1f; color: #cfa4d8; font-size: 0.58rem; font-weight: 700; padding: 5px 2px; text-align: center; }
+    .pd-tab.active { background: #6e1a85; color: #ffd8ff; border-color: #b73ad8; }
+    .pd-body { padding: 10px; }
+    .pd-sec { padding: 8px 0; border-bottom: 1px solid #2a0e2a; }
+    .pd-sec:last-child { border-bottom: none; }
+    .pd-stitle { font-size: 0.55rem; text-transform: uppercase; letter-spacing: 1px; color: #9450ad; margin-bottom: 6px; }
+    .pd-row { display: flex; align-items: center; justify-content: space-between; }
+    .pd-lbl { font-size: 0.74rem; color: #eec8ee; }
+    .pd-toggle { width: 36px; height: 18px; border-radius: 18px; position: relative; }
+    .pd-toggle.on { background: #8010a0; border: 1px solid #cc40cc; }
+    .pd-toggle.on::after { content: ''; position: absolute; width: 12px; height: 12px; border-radius: 50%; background: #ff80ff; top: 2px; right: 3px; }
+    .pd-toggle.off { background: #3a183a; border: 1px solid #5a2a5a; }
+    .pd-toggle.off::after { content: ''; position: absolute; width: 12px; height: 12px; border-radius: 50%; background: #7a3a7a; top: 2px; left: 3px; }
+    .pd-footer { padding: 8px 10px; background: #130813; border-top: 1px solid #2e0e2e; display: flex; align-items: center; gap: 6px; }
+    .pd-dot-on { width: 6px; height: 6px; border-radius: 50%; background: #50d050; box-shadow: 0 0 5px #50d050; }
+    .pd-status-txt { font-size: 0.64rem; color: #7a50a0; }
+
+    .side-wrap { display: flex; gap: 32px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 32px; }
+    .side-desc { flex: 1; min-width: 220px; }
+    @media (max-width: 640px) { .popup-demo { width: 100%; max-width: 280px; margin: 0 auto; } .side-wrap { flex-direction: column-reverse; align-items: center; } }
+
+    .divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+    /* ── TIMER SELECT PREVIEW ─────────────────────────────── */
+    .inline-select-row {
+      display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+      background: var(--bg-inset); border: 1px solid var(--border-md);
+      border-radius: 6px; padding: 10px 14px; margin: 10px 0;
+    }
+    .inline-select-label { font-size: 0.78rem; color: var(--text); font-weight: 600; white-space: nowrap; }
+    .inline-select-mock {
+      background: var(--bg-inset); border: 1px solid #4a2050; border-radius: 6px;
+      padding: 5px 10px; color: #d09ad8; font-size: 0.78rem;
+      font-family: 'Segoe UI', Tahoma, sans-serif; cursor: default;
+    }
+
+    /* ── FOOTER ───────────────────────────────────────────── */
+    footer {
+      background: var(--bg-card-dark); border-top: 1px solid var(--border);
+      padding: 32px 20px; text-align: center;
+      font-size: 0.72rem; color: var(--text-dim); line-height: 1.9;
+    }
+    footer a { color: #7030a0; text-decoration: none; }
+    footer a:hover { color: #bb60cc; }
+  </style>
+</head>
+<body>
+
+<nav class="site-nav">
+  <a class="nav-brand" href="index.html">
+    <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+      <rect width="128" height="128" rx="18" fill="#1e0022"/>
+      <ellipse cx="40" cy="36" rx="11" ry="27" fill="#9922aa" transform="rotate(-14 40 36)"/>
+      <ellipse cx="40" cy="36" rx="5"  ry="17" fill="#ee66ff" transform="rotate(-14 40 36)"/>
+      <ellipse cx="88" cy="36" rx="11" ry="27" fill="#9922aa" transform="rotate(14 88 36)"/>
+      <ellipse cx="88" cy="36" rx="5"  ry="17" fill="#ee66ff" transform="rotate(14 88 36)"/>
+      <circle cx="64" cy="83" r="31" fill="#9922aa"/>
+      <circle cx="64" cy="83" r="27" fill="#bb44cc"/>
+      <circle cx="52" cy="77" r="5" fill="#1e0022"/>
+      <circle cx="76" cy="77" r="5" fill="#1e0022"/>
+      <ellipse cx="64" cy="91" rx="5" ry="4" fill="#ff99ff"/>
+      <circle cx="104" cy="22" r="14" fill="#ee66ff"/>
+      <rect   x="101" y="14" width="6" height="16" rx="3" fill="#1e0022"/>
+      <rect   x="96"  y="19" width="16" height="6" rx="3" fill="#1e0022"/>
+    </svg>
+    BambiBrowser+
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Guide Home</a>
+    <a href="#install">Install</a>
+    <a href="#player">Player</a>
+    <a href="#boot">Boot</a>
+    <a href="#usage">Using It</a>
+    <a href="#input-lock">Input Lock</a>
+    <a href="#auto-play">Auto-Play</a>
+  </div>
+</nav>
+
+<div id="top">
+  <div class="hero">
+    <svg class="hero-svg" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
+      <rect width="128" height="128" rx="18" fill="#1e0022"/>
+      <ellipse cx="40" cy="36" rx="11" ry="27" fill="#9922aa" transform="rotate(-14 40 36)"/>
+      <ellipse cx="40" cy="36" rx="5"  ry="17" fill="#ee66ff" transform="rotate(-14 40 36)"/>
+      <ellipse cx="88" cy="36" rx="11" ry="27" fill="#9922aa" transform="rotate(14 88 36)"/>
+      <ellipse cx="88" cy="36" rx="5"  ry="17" fill="#ee66ff" transform="rotate(14 88 36)"/>
+      <circle cx="64" cy="83" r="31" fill="#9922aa"/>
+      <circle cx="64" cy="83" r="27" fill="#bb44cc"/>
+      <circle cx="52" cy="77" r="5" fill="#1e0022"/>
+      <circle cx="76" cy="77" r="5" fill="#1e0022"/>
+      <ellipse cx="64" cy="91" rx="5" ry="4" fill="#ff99ff"/>
+      <circle cx="104" cy="22" r="14" fill="#ee66ff"/>
+      <rect   x="101" y="14" width="6" height="16" rx="3" fill="#1e0022"/>
+      <rect   x="96"  y="19" width="16" height="6" rx="3" fill="#1e0022"/>
+    </svg>
+    <h1>BambiBrowser+ User Guide</h1>
+    <div class="hero-ver">v5.2</div>
+    <p>Everything you need to get set up and understand how the extension works — from first install to daily use.</p>
+    <div class="hero-steps">
+      <div class="hero-step"><div class="hero-step-num">1</div>Install extension</div>
+      <div class="hero-step-arrow">›</div>
+      <div class="hero-step"><div class="hero-step-num">2</div>Start the player</div>
+      <div class="hero-step-arrow">›</div>
+      <div class="hero-step"><div class="hero-step-num">3</div>Enable on boot</div>
+      <div class="hero-step-arrow">›</div>
+      <div class="hero-step"><div class="hero-step-num">4</div>Enjoy Bambi Mode</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─────────────────────────── SECTION 1: INSTALL ───────────────────────── -->
+<section id="install" class="page-section">
+  <div class="container">
+    <div class="section-eyebrow">Step 1</div>
+    <h2 class="section-h2">Install the Extension</h2>
+    <p class="section-lead">BambiBrowser+ is a developer-mode extension — not published in any store. It takes about two minutes to load. Choose your browser below.</p>
+
+    <div class="browser-tabs">
+      <button class="btab-btn active" data-btab="chrome">Chrome</button>
+      <button class="btab-btn" data-btab="edge">Edge</button>
+      <button class="btab-btn" data-btab="brave">Brave</button>
+      <button class="btab-btn" data-btab="opera">Opera</button>
+    </div>
+    <div class="btab-panels">
+
+      <div class="btab-pane active" id="btab-chrome">
+        <div class="browser-url"><div class="browser-url-dot"></div>chrome://extensions/</div>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Open the extensions page</div><div class="step-desc">Paste <code>chrome://extensions/</code> into the address bar and press <kbd>Enter</kbd>.</div></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Enable Developer Mode</div><div class="step-desc">Look in the <strong style="color:var(--text)">top-right corner</strong> for the <em>Developer mode</em> label.</div><div class="dev-mode-box"><div><div class="dev-mode-label">Developer mode</div><div class="dev-mode-where">Top-right corner of the page</div></div><div class="mini-pill">Toggle ON</div></div><div class="step-desc">Once enabled, three new buttons appear across the top.</div></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Click "Load unpacked"</div><div class="step-desc">The <em>Load unpacked</em> button appears at the top-left after enabling Developer Mode. Click it — a folder picker opens.</div></div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Select the <code>extension</code> folder</div><div class="step-desc">Navigate into your BambiBrowser+ folder and select the <code>extension</code> subfolder (the one containing <code>manifest.json</code>). Click <strong style="color:var(--text)">Select Folder</strong>.</div></div></div>
+          <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Pin the icon to your toolbar</div><div class="step-desc">Click the puzzle-piece 🧩 icon in the toolbar, find <strong style="color:var(--text)">BambiBrowser+</strong>, and click the pin icon so the 🐰 icon always shows.</div></div></div>
+        </div>
+        <div class="browser-note">If Chrome shows a warning bar saying <em>"Disable developer mode extensions"</em> — click <strong>Dismiss</strong>. It won't affect anything.</div>
+      </div>
+
+      <div class="btab-pane" id="btab-edge">
+        <div class="browser-url"><div class="browser-url-dot"></div>edge://extensions/</div>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Open the extensions page</div><div class="step-desc">Paste <code>edge://extensions/</code> into the address bar and press <kbd>Enter</kbd>.</div></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Enable Developer Mode</div><div class="step-desc">In Edge, the toggle is in the <strong style="color:var(--text)">left sidebar</strong>, near the bottom.</div><div class="dev-mode-box"><div><div class="dev-mode-label">Developer mode</div><div class="dev-mode-where">Left sidebar, bottom area</div></div><div class="mini-pill">Toggle ON</div></div></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Click "Load unpacked"</div><div class="step-desc">Appears in the main panel after toggling Developer Mode.</div></div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Select the <code>extension</code> folder</div><div class="step-desc">Navigate into your BambiBrowser+ folder and select the <code>extension</code> subfolder. Click <strong style="color:var(--text)">Select Folder</strong>.</div></div></div>
+          <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Pin the icon</div><div class="step-desc">Click the Extensions icon → find BambiBrowser+ → click the eye icon to pin it.</div></div></div>
+        </div>
+        <div class="browser-note">Edge may pop up a dialog asking if you want to "Allow extensions from other sources" — choose <strong>Allow</strong>.</div>
+      </div>
+
+      <div class="btab-pane" id="btab-brave">
+        <div class="browser-url"><div class="browser-url-dot"></div>brave://extensions/</div>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Open the extensions page</div><div class="step-desc">Paste <code>brave://extensions/</code> into the address bar and press <kbd>Enter</kbd>.</div></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Enable Developer Mode</div><div class="step-desc">Toggle is in the <strong style="color:var(--text)">top-right corner</strong>, identical to Chrome.</div><div class="dev-mode-box"><div><div class="dev-mode-label">Developer mode</div><div class="dev-mode-where">Top-right corner of the page</div></div><div class="mini-pill">Toggle ON</div></div></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Click "Load unpacked"</div><div class="step-desc">Three buttons appear at the top. Click <em>Load unpacked</em>.</div></div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Select the <code>extension</code> folder</div><div class="step-desc">Navigate to your BambiBrowser+ folder, select the <code>extension</code> subfolder, click <strong style="color:var(--text)">Select Folder</strong>.</div></div></div>
+          <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">Allow the unpacked extension if prompted</div><div class="step-desc">Brave may show a one-time confirmation — click <strong style="color:var(--text)">Use as-is</strong>.</div></div></div>
+        </div>
+      </div>
+
+      <div class="btab-pane" id="btab-opera">
+        <div class="browser-url"><div class="browser-url-dot"></div>opera://extensions/</div>
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Open the extensions page</div><div class="step-desc">Paste <code>opera://extensions/</code> into the address bar and press <kbd>Enter</kbd>. Or use Menu → Extensions → Manage Extensions.</div></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Enable Developer Mode</div><div class="dev-mode-box"><div><div class="dev-mode-label">Developer mode</div><div class="dev-mode-where">Top-right corner of the page</div></div><div class="mini-pill">Toggle ON</div></div></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Click "Load unpacked"</div><div class="step-desc">Appears at the top after enabling Developer Mode.</div></div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Select the <code>extension</code> folder</div><div class="step-desc">Navigate to your BambiBrowser+ folder, select the <code>extension</code> subfolder, click <strong style="color:var(--text)">Select Folder</strong>.</div></div></div>
+        </div>
+        <div class="browser-note">Opera may show a banner about non-store extensions. This is cosmetic only — click <strong>Got it</strong>.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── SECTION 2: PLAYER ────────────────────────── -->
+<section id="player" class="page-section">
+  <div class="container">
+    <div class="section-eyebrow">Step 2</div>
+    <h2 class="section-h2">Start Bambi Player</h2>
+    <p class="section-lead">The extension needs a small background helper running on your PC. It receives video URLs from the browser and launches VLC. Without it, the browser falls back to normal in-page playback.</p>
+
+    <div class="player-cards">
+      <div class="player-card">
+        <div class="player-card-head"><div class="player-card-head-label">Standard</div><div class="player-card-head-title">Single monitor</div></div>
+        <div class="player-card-body">
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Open the BambiBrowser+ folder</div><div class="step-desc">Navigate to wherever you extracted or cloned the files.</div></div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Double-click <code>bambi_player.exe</code></div><div class="step-desc">No window opens — the player runs silently in the background.</div></div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Check the system tray</div><div class="step-desc">A 🐰 icon appears in the tray (bottom-right of the taskbar). That means the helper is awake and listening.</div><div class="tray-demo"><svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><rect width="128" height="128" rx="18" fill="#1e0022"/><ellipse cx="40" cy="36" rx="11" ry="27" fill="#9922aa" transform="rotate(-14 40 36)"/><ellipse cx="40" cy="36" rx="5" ry="17" fill="#ee66ff" transform="rotate(-14 40 36)"/><ellipse cx="88" cy="36" rx="11" ry="27" fill="#9922aa" transform="rotate(14 88 36)"/><ellipse cx="88" cy="36" rx="5" ry="17" fill="#ee66ff" transform="rotate(14 88 36)"/><circle cx="64" cy="83" r="31" fill="#9922aa"/><circle cx="64" cy="83" r="27" fill="#bb44cc"/><circle cx="52" cy="77" r="5" fill="#1e0022"/><circle cx="76" cy="77" r="5" fill="#1e0022"/><ellipse cx="64" cy="91" rx="5" ry="4" fill="#ff99ff"/></svg>BambiBrowser+</div></div></div>
+          </div>
+          <div class="callout good" style="margin-top:16px"><span class="callout-icon">✓</span><span>To stop the player later, right-click its tray icon and choose <strong>Quit</strong>.</span></div>
+        </div>
+      </div>
+
+      <div class="player-card">
+        <div class="player-card-head"><div class="player-card-head-label">Multi-monitor mode</div><div class="player-card-head-title">2–3 screens at once</div></div>
+        <div class="player-card-body">
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Open PowerShell in the BambiBrowser+ folder</div><div class="step-desc">Right-click inside the folder → <em>Open in Terminal</em>.</div></div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Run the multi-monitor script</div><div class="step-desc"><code>.\start_bambi_player_multimon.ps1</code></div></div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Check the tray</div><div class="step-desc">Same 🐰 icon, same helper. The extension doesn't need to know which mode you're running.</div></div></div>
+          </div>
+          <div class="callout" style="margin-top:16px"><span class="callout-icon">🖥</span><span><strong>Monitor 1</strong> plays with full audio. Additional monitors mirror the video muted, all fullscreen.</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout warn" style="margin-top:20px"><span class="callout-icon">⚠</span><span>VLC must be installed and reachable. The player helper looks for VLC in the bundled <code>vlc/</code> subfolder first, then falls back to a system-wide VLC installation.</span></div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── SECTION 3: BOOT ──────────────────────────── -->
+<section id="boot" class="page-section">
+  <div class="container">
+    <div class="section-eyebrow">Step 3</div>
+    <h2 class="section-h2">Start on Boot (optional)</h2>
+    <p class="section-lead">Skip the manual double-click every session — have the player start automatically when you log in to Windows.</p>
+
+    <div class="boot-grid">
+      <div class="boot-card">
+        <div class="boot-card-head"><div class="boot-badge">Option A</div><div class="boot-card-title">Startup Folder</div></div>
+        <div class="boot-card-body">
+          <p class="boot-card-desc">Easiest method. Anything placed in the Windows startup folder launches when you log in.</p>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Open the Startup folder</div><div class="step-desc">Press <kbd>Win</kbd> + <kbd>R</kbd>, type <code>shell:startup</code>, press <kbd>Enter</kbd>.</div></div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Create a shortcut</div><div class="step-desc">Right-click <code>bambi_player.exe</code> → <em>Create shortcut</em>. Drag or copy that shortcut into the startup folder.</div></div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Done</div><div class="step-desc">Next time you log in, the tray icon will appear automatically within a few seconds.</div></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="boot-card">
+        <div class="boot-card-head"><div class="boot-badge">Option B</div><div class="boot-card-title">Task Scheduler</div></div>
+        <div class="boot-card-body">
+          <p class="boot-card-desc">Cleaner — no UAC flash, starts silently at login.</p>
+          <div class="steps">
+            <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Open Task Scheduler</div><div class="step-desc">Press <kbd>Win</kbd>, search <em>Task Scheduler</em>, open it.</div></div></div>
+            <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Create Basic Task</div><div class="step-desc">In the right panel click <em>Create Basic Task…</em> — name it e.g. <code>BambiPlayer</code>.</div></div></div>
+            <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Set trigger: When I log on</div><div class="step-desc">On the Trigger screen choose <em>When I log on</em>. Click Next.</div></div></div>
+            <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Set action: Start a program</div><div class="step-desc">Choose <em>Start a program</em>, then <em>Browse</em> and navigate to <code>bambi_player.exe</code>. Click Next → Finish.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout info" style="margin-top:4px"><span class="callout-icon">ℹ</span><span>You can always flip Bambi Mode off from the popup without quitting the player — the player just sits idle until you re-enable it.</span></div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── SECTION 4: USAGE ─────────────────────────── -->
+<section id="usage" class="page-section">
+  <div class="container">
+    <div class="section-eyebrow">Step 4</div>
+    <h2 class="section-h2">Using the Extension</h2>
+    <p class="section-lead">Click the 🐰 icon in your browser toolbar to open the control panel. Everything is controlled from there.</p>
+
+    <div class="side-wrap">
+      <div class="popup-demo">
+        <div class="pd-header">
+          <svg class="pd-icon" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg"><rect width="128" height="128" rx="18" fill="#1e0022"/><ellipse cx="40" cy="36" rx="11" ry="27" fill="#9922aa" transform="rotate(-14 40 36)"/><ellipse cx="40" cy="36" rx="5" ry="17" fill="#ee66ff" transform="rotate(-14 40 36)"/><ellipse cx="88" cy="36" rx="11" ry="27" fill="#9922aa" transform="rotate(14 88 36)"/><ellipse cx="88" cy="36" rx="5" ry="17" fill="#ee66ff" transform="rotate(14 88 36)"/><circle cx="64" cy="83" r="31" fill="#9922aa"/><circle cx="64" cy="83" r="27" fill="#bb44cc"/><circle cx="52" cy="77" r="5" fill="#1e0022"/><circle cx="76" cy="77" r="5" fill="#1e0022"/><ellipse cx="64" cy="91" rx="5" ry="4" fill="#ff99ff"/><circle cx="104" cy="22" r="14" fill="#ee66ff"/><rect x="101" y="14" width="6" height="16" rx="3" fill="#1e0022"/><rect x="96" y="19" width="16" height="6" rx="3" fill="#1e0022"/></svg>
+          <span class="pd-h-title">🐰 BambiBrowser+</span>
+          <span class="pd-h-ver">v5.2</span>
+        </div>
+        <div class="pd-tabs">
+          <div class="pd-tab active">General</div><div class="pd-tab">Domains</div><div class="pd-tab">Manual</div><div class="pd-tab">Blacklist</div>
+        </div>
+        <div class="pd-body">
+          <div class="pd-sec"><div class="pd-stitle">Bambi Mode</div><div class="pd-row"><span class="pd-lbl">Enable hijack</span><div class="pd-toggle on"></div></div></div>
+          <div class="pd-sec"><div class="pd-stitle">Playback</div><div class="pd-row"><span class="pd-lbl">Multi-monitor</span><div class="pd-toggle off"></div></div></div>
+        </div>
+        <div class="pd-footer"><div class="pd-dot-on"></div><span class="pd-status-txt">bambi_player is running</span></div>
+      </div>
+      <div class="side-desc">
+        <div class="ui-item"><div class="ui-item-label">Toolbar icon</div><div class="ui-item-name" style="margin-bottom:8px">Opening the popup</div><div class="ui-item-desc">Click the 🐰 BambiBrowser+ icon in your browser toolbar to open the control panel. If you don't see it, click the puzzle-piece 🧩 icon and pin BambiBrowser+.</div></div>
+        <div style="margin-top:12px" class="ui-item"><div class="ui-item-label">Status indicator</div><div class="ui-item-name" style="margin-bottom:8px">At the bottom of the popup</div><div class="ui-item-desc"><span class="dot-online"></span> <strong style="color:var(--green)">Green</strong> — <code>bambi_player</code> is running. VLC hijack is active.<br><span style="display:inline-block;margin-top:6px"><span class="dot-offline"></span> <strong style="color:var(--red)">Red</strong> — player is offline. Extension falls back to browser autoplay.</span></div></div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- GENERAL TAB -->
+    <div class="feature-block">
+      <div class="feature-head"><div class="feature-badge">General tab</div><div class="feature-title">Master controls &amp; playback settings</div></div>
+      <div class="feature-body">
+        <div class="ui-item"><div class="ui-item-label">Bambi Mode section</div><div class="ui-item-top"><div><div class="ui-item-name">Enable hijack</div></div><div class="mini-toggle on"></div></div><div class="ui-item-desc">The master on/off switch. When <strong style="color:var(--text)">ON</strong>, the extension actively watches matched domains and hijacks video to VLC. When <strong style="color:var(--text)">OFF</strong>, the extension is completely dormant. Toggling it ON while on a matched tab triggers the hijack immediately without reloading.</div></div>
+        <div class="ui-item"><div class="ui-item-label">Playback section</div><div class="ui-item-top"><div><div class="ui-item-name">Multi-monitor</div></div><div class="mini-toggle off"></div></div><div class="ui-item-desc">When <strong style="color:var(--text)">ON</strong>, the video URL is sent to the multi-monitor helper, which opens a fullscreen VLC window on every connected display simultaneously. Monitor 1 plays with full audio; all others are muted. Keyboard and pointer lock are always engaged in this mode. Requires the multi-monitor player script.</div></div>
+        <div class="ui-item"><div class="ui-item-label">Playback section</div><div class="ui-item-name" style="margin-bottom:8px">Manual mode click sensitivity</div><select class="mock-select"><option>Balanced (recommended)</option></select><div class="ui-item-desc" style="margin-top:10px">Controls how tightly a user click must be paired with a video play event on <span class="badge-manual">MANUAL</span> domains.<br><br><strong style="color:var(--text)">Strict</strong> — ~1.2 s window. <strong style="color:var(--text)">Balanced</strong> — 2.2 s (default). <strong style="color:var(--text)">Relaxed</strong> — 3.2 s, more forgiving for slow-loading embeds.</div></div>
+      </div>
+    </div>
+
+    <!-- DOMAINS TAB -->
+    <div class="feature-block">
+      <div class="feature-head"><div class="feature-badge">Domains tab</div><div class="feature-title">Which sites trigger Bambi Mode</div></div>
+      <div class="feature-body">
+        <div class="ui-item"><div class="ui-item-label">Suggested Sites section</div><div class="ui-item-name" style="margin-bottom:10px">One-click preset domains</div><div class="mock-domain-list"><div class="mock-preset-item"><span class="mock-preset-name">HypnoTube <span class="badge-auto">AUTO</span></span><span class="mock-preset-added">&#10003;</span></div><div class="mock-preset-item"><span class="mock-preset-name">Pornhub <span class="badge-manual">MANUAL</span></span><span class="mock-preset-add">+</span></div><div class="mock-preset-item"><span class="mock-preset-name">xVideos <span class="badge-manual">MANUAL</span></span><span class="mock-preset-add">+</span></div></div><div class="ui-item-desc">Pre-configured popular sites — each with the correct mode and CDN subdomains already wired in. Click <strong style="color:var(--text)">+</strong> to add. Sites you've already added show a <strong style="color:var(--green)">&#10003;</strong> instead.</div></div>
+        <div class="ui-item"><div class="ui-item-label">Domain modes</div><div class="ui-item-name" style="margin-bottom:10px">AUTO vs MANUAL</div><div class="mock-domain-list"><div class="mock-domain-item"><span class="mock-domain-name">hypnotube.com <span class="badge-auto">AUTO</span></span><span class="mock-domain-actions"><button class="mock-icon-btn remove">✕</button></span></div><div class="mock-domain-item"><span class="mock-domain-name">example.com <span class="badge-manual">MANUAL</span></span><span class="mock-domain-actions"><button class="mock-icon-btn">⚙</button><button class="mock-icon-btn remove">✕</button></span></div></div><div class="ui-item-desc"><span class="badge-auto">AUTO</span> — the extension proactively scans for a video element when the page loads and hijacks it automatically.<br><br><span class="badge-manual">MANUAL</span> — the extension waits for you to click play, intercepts that event, pauses the browser player, and hands the URL to VLC.</div></div>
+        <div class="ui-item"><div class="ui-item-label">Adding a domain</div><div class="ui-item-name" style="margin-bottom:8px">Type the domain → Add</div><div class="ui-item-desc">Type any domain (e.g. <code>somesite.com</code>) and click <strong style="color:var(--text)">Add</strong> or press <kbd>Enter</kbd>. Custom domains get the <span class="badge-manual">MANUAL</span> badge. <code>www.</code> is stripped automatically.</div></div>
+        <div class="ui-item"><div class="ui-item-label">⚙ Configure (manual domains only)</div><div class="ui-item-name" style="margin-bottom:8px">Player learning mode</div><div class="ui-item-desc">Click the ⚙ cog next to a <span class="badge-manual">MANUAL</span> domain. A crosshair overlay appears — click the main video player on the page once. The extension remembers that element for accurate future hijacks.</div></div>
+      </div>
+    </div>
+
+    <!-- MANUAL TAB -->
+    <div class="feature-block">
+      <div class="feature-head"><div class="feature-badge">Manual tab</div><div class="feature-title">Keyboard shortcut &amp; local file playback</div></div>
+      <div class="feature-body">
+        <div class="ui-item"><div class="ui-item-label">Manual trigger section</div><div class="ui-item-top"><div><div class="ui-item-name">Enable shortcut trigger</div></div><div class="mini-toggle off"></div></div><div class="ui-item-desc">When enabled, pressing the configured keyboard shortcut on any page activates a targeting overlay. Click any video and it is sent to VLC — bypassing domain matching entirely. Useful for one-off sites.</div></div>
+        <div class="ui-item"><div class="ui-item-label">Keyboard shortcut picker</div><div class="ui-item-name" style="margin-bottom:6px">Default: <kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>V</kbd></div><select class="mock-select"><option>Alt+Shift+V (default)</option></select><div class="ui-item-desc" style="margin-top:10px">Four options: <kbd>Alt+Shift+V</kbd>, <kbd>Ctrl+Shift+V</kbd>, <kbd>Alt+V</kbd>, <kbd>Ctrl+Alt+V</kbd>. Pick whichever doesn't conflict with your sites.</div></div>
+        <div class="ui-item"><div class="ui-item-label">Local file section</div><div class="ui-item-name" style="margin-bottom:8px">Browse → Play</div><div class="ui-item-desc">Pick any video file from your local disk and send it directly to VLC without needing a URL. Click <strong style="color:var(--text)">Browse</strong>, select your file, then click ▶ <strong style="color:var(--text)">Play</strong>.</div></div>
+      </div>
+    </div>
+
+    <!-- BLACKLIST TAB -->
+    <div class="feature-block">
+      <div class="feature-head"><div class="feature-badge">Blacklist tab</div><div class="feature-title">Skip specific URLs on watched domains</div></div>
+      <div class="feature-body">
+        <div class="ui-item"><div class="ui-item-label">How it works</div><div class="ui-item-name" style="margin-bottom:8px">URL substring matching</div><div class="ui-item-desc">Each entry is checked against the full URL of the current page. If the URL contains the entry anywhere (case-insensitive), the extension skips that page — even if the domain is active.</div></div>
+        <div class="ui-item"><div class="ui-item-label">Examples</div><div class="ui-item-name" style="margin-bottom:10px">Useful patterns</div><div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><code>preview</code><span style="font-size:0.8rem;color:var(--text-muted)">→ skips any URL containing "preview"</span></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><code>category/shorts</code><span style="font-size:0.8rem;color:var(--text-muted)">→ skips that specific path</span></div><div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap"><code>?embed=</code><span style="font-size:0.8rem;color:var(--text-muted)">→ skips pages with an embed query param</span></div></div></div>
+        <div class="ui-item"><div class="ui-item-label">Adding &amp; removing</div><div class="ui-item-name" style="margin-bottom:8px">Type the pattern → Add</div><div class="ui-item-desc">Type any keyword or path segment and click <strong style="color:var(--text)">Add</strong>. Entries appear in the list — click ✕ to remove. The protocol (<code>https://</code>) is stripped automatically.</div></div>
+      </div>
+    </div>
+
+    <!-- WHAT HAPPENS -->
+    <div class="section-eyebrow" style="margin-top:8px">When you browse</div>
+    <div class="feature-block" style="margin-top:10px">
+      <div class="feature-head"><div class="feature-badge">AUTO domains</div><div class="feature-title">What happens on e.g. hypnotube.com</div></div>
+      <div class="feature-body">
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Page loads</div><div class="step-desc">The extension checks domain match, blacklist, and ignored-paths list. If any check fails, the page is left alone.</div></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">Video element found</div><div class="step-desc">The extension scans for the main <code>&lt;video&gt;</code> element with a valid source URL — it won't fire on ad pre-rolls.</div></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">If the player is running</div><div class="step-desc">Browser video is paused. The URL is sent to <code>bambi_player</code>. VLC opens fullscreen. Pointer and keyboard lock activate.</div></div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">When the video ends</div><div class="step-desc">VLC closes, locks release, and the page returns to normal. The extension resets and is ready for the next video.</div></div></div>
+          <div class="step"><div class="step-num">5</div><div class="step-body"><div class="step-title">If the player is NOT running</div><div class="step-desc">The extension falls back gracefully — it unmutes and autoplays the video in the browser as normal.</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="feature-block">
+      <div class="feature-head"><div class="feature-badge">MANUAL domains</div><div class="feature-title">What happens on custom-added sites</div></div>
+      <div class="feature-body">
+        <div class="steps">
+          <div class="step"><div class="step-num">1</div><div class="step-body"><div class="step-title">Page loads — extension waits</div><div class="step-desc">Nothing happens automatically. The extension watches in the background but does not act until you do.</div></div></div>
+          <div class="step"><div class="step-num">2</div><div class="step-body"><div class="step-title">You click play</div><div class="step-desc">The extension detects your click, identifies which video element is closest, and waits for its play event.</div></div></div>
+          <div class="step"><div class="step-num">3</div><div class="step-body"><div class="step-title">Hijack fires within the sensitivity window</div><div class="step-desc">If the play event arrives within the configured window (default 2.2 s), the extension pauses the browser player and sends the URL to VLC.</div></div></div>
+          <div class="step"><div class="step-num">4</div><div class="step-body"><div class="step-title">Rest is the same as AUTO mode</div><div class="step-desc">VLC opens fullscreen, locks activate, everything resets when the video ends.</div></div></div>
+        </div>
+        <div class="callout" style="margin-top:4px"><span class="callout-icon">💡</span><span>If a site loads a long pre-roll ad before the main content, the extension waits an <strong style="color:var(--text)">18-second grace period</strong> on eligible domains before considering a play event as intentional.</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─────────────────────────── SECTION 5: INPUT LOCK ────────────────────── -->
+<section id="input-lock" class="page-section">
+  <div class="container">
+    <div class="section-eyebrow">v5.2 Feature <span class="badge-new" style="font-size:0.58rem;padding:2px 7px;vertical-align:middle;margin-left:4px">NEW</span></div>
+    <h2 class="section-h2">Input Lock Timer</h2>
+    <p class="section-lead">
+      In multi-monitor mode, keyboard and pointer locks are always active while a video plays. In single-monitor mode these locks are now optional — enable <em>Input lock</em> and choose how long before they release automatically.
+    </p>
+
+    <div class="feature-block">
+      <div class="feature-head">
+        <div class="feature-badge new">New in 5.2</div>
+        <div class="feature-title">Input lock (single-monitor)</div>
+      </div>
+      <div class="feature-body">
+
+        <div class="ui-item">
+          <div class="ui-item-label">General tab → Playback section</div>
+          <div class="ui-item-top">
+            <div><div class="ui-item-name">Input lock (single-monitor)</div></div>
+            <div class="mini-toggle off"></div>
+          </div>
+          <div class="ui-item-desc">
+            When <strong style="color:var(--text)">enabled</strong>, the keyboard and pointer lock engage at the start of a VLC fullscreen session — exactly as they do in multi-monitor mode — but only for single-monitor setups.<br><br>
+            When <strong style="color:var(--text)">disabled</strong> (default), single-monitor sessions play without any input lock. Multi-monitor is unaffected — it always locks regardless of this toggle.
+          </div>
+        </div>
+
+        <div class="ui-item">
+          <div class="ui-item-label">General tab → Playback section</div>
+          <div class="ui-item-name" style="margin-bottom:8px">Auto-release after</div>
+          <div class="inline-select-row">
+            <span class="inline-select-label">Auto-release after</span>
+            <span class="inline-select-mock">1 hour ▾</span>
+          </div>
+          <div class="ui-item-desc">
+            Only visible when <em>Input lock</em> is enabled. Choose how long the lock stays active before it releases on its own:<br><br>
+            10 minutes · 20 minutes · 1 hour (default) · 2 hours · 4 hours · 6 hours · 8 hours · 12 hours<br><br>
+            When the timer fires, the keyboard lock, pointer lock, and key-suppression listener are all removed automatically without needing any interaction. If you exit fullscreen before the timer expires, the timer is cancelled.
+          </div>
+        </div>
+
+        <div class="callout info">
+          <span class="callout-icon">ℹ</span>
+          <span>Set the timer to match your typical session length. The timer resets each time a new video starts fullscreen — it doesn't carry over between videos.</span>
+        </div>
+
+        <div class="callout warn">
+          <span class="callout-icon">⚠</span>
+          <span>While the input lock is active, keyboard shortcuts and mouse movement are suppressed in the browser. VLC still receives all input normally through its own window. Press the VLC fullscreen shortcut or wait for the auto-release timer if you need control back early.</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─────────────────────────── SECTION 6: AUTO-PLAY ─────────────────────── -->
+<section id="auto-play" class="page-section">
+  <div class="container">
+    <div class="section-eyebrow">v5.2 Feature <span class="badge-new" style="font-size:0.58rem;padding:2px 7px;vertical-align:middle;margin-left:4px">NEW</span></div>
+    <h2 class="section-h2">Auto-Play Fallback</h2>
+    <p class="section-lead">
+      Set a URL that automatically opens in a new browser tab if Bambi Mode is active but no video has been detected for a configurable amount of idle time. Keeps sessions going without you needing to navigate manually.
+    </p>
+
+    <div class="feature-block">
+      <div class="feature-head">
+        <div class="feature-badge new">New in 5.2</div>
+        <div class="feature-title">Auto-Play Fallback</div>
+      </div>
+      <div class="feature-body">
+
+        <div class="ui-item">
+          <div class="ui-item-label">General tab → Auto-Play Fallback section</div>
+          <div class="ui-item-top">
+            <div><div class="ui-item-name">Open URL if no video found</div></div>
+            <div class="mini-toggle off"></div>
+          </div>
+          <div class="ui-item-desc">
+            Master toggle for the auto-play fallback. When <strong style="color:var(--text)">enabled</strong> and Bambi Mode is active, a countdown begins as soon as the extension detects an idle state (no video sent to VLC yet). When the countdown expires, the configured URL opens in a new tab.<br><br>
+            The timer automatically resets when:<br>
+            &bull; You navigate to a new page on a matched domain<br>
+            &bull; A video is successfully sent to VLC (timer cancels permanently for that session)<br>
+            &bull; You disable the toggle<br><br>
+            After the URL opens, the timer reschedules itself so consecutive idle periods keep triggering the fallback until a video is found.
+          </div>
+        </div>
+
+        <div class="ui-item">
+          <div class="ui-item-label">Fallback URL</div>
+          <div class="ui-item-name" style="margin-bottom:8px">Enter the URL to open</div>
+          <div class="ui-item-desc">
+            Paste any <code>https://</code> URL here — typically a page on a site you've already added to your active domains. When the idle timer fires, this URL opens in a new browser tab.
+          </div>
+        </div>
+
+        <div class="ui-item">
+          <div class="ui-item-label">Open after idle for</div>
+          <div class="ui-item-name" style="margin-bottom:8px">How long to wait before opening the URL</div>
+          <div class="inline-select-row">
+            <span class="inline-select-label">Open after idle for</span>
+            <span class="inline-select-mock">10 minutes ▾</span>
+          </div>
+          <div class="ui-item-desc" style="margin-top:10px">
+            Choose the idle window that suits your browsing style:<br><br>
+            5 minutes · 10 minutes (default) · 15 minutes · 20 minutes · 30 minutes · 45 minutes · 1 hour<br><br>
+            Shorter times are useful if you tend to leave the browser idle and want it to pick up content quickly.
+            Longer times leave more room for you to browse and click play yourself before the fallback kicks in.
+          </div>
+        </div>
+
+        <div class="callout good">
+          <span class="callout-icon">✓</span>
+          <span>The fallback URL only opens when <strong>Bambi Mode is active</strong> and <strong>no video has been sent to VLC</strong> during the current idle window. It won't interrupt an active VLC session.</span>
+        </div>
+
+        <div class="callout info">
+          <span class="callout-icon">ℹ</span>
+          <span>The fallback URL should be a page on a site already in your active domains list — otherwise the extension won't try to hijack its video automatically when it loads.</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────────────────────── FOOTER ─────────────────────────────────── -->
+<footer>
+  <div>
+    BambiBrowser+ v5.2 &nbsp;·&nbsp;
+    Based on <a href="https://github.com/sissy3city/BambiBrowser" target="_blank">BambiBrowser</a> by sissy3city &nbsp;·&nbsp;
+    Extended by <a href="https://github.com/geordie-bambi-mk2" target="_blank">geordie-bambi-mk2</a>
+  </div>
+  <div style="margin-top:4px;font-size:0.66rem;color:#3a1a3a">
+    v5.2 · Input Lock Timer · Auto-Play Fallback · Popup tabs: General · Domains · Manual · Blacklist
+  </div>
+</footer>
+
+<script>
+  const btabBtns  = document.querySelectorAll('.btab-btn');
+  const btabPanes = document.querySelectorAll('.btab-pane');
+  btabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.btab;
+      btabBtns.forEach(b => b.classList.toggle('active', b === btn));
+      btabPanes.forEach(p => p.classList.toggle('active', p.id === 'btab-' + target));
+    });
+  });
+
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const sections = ['install','player','boot','usage','input-lock','auto-play'].map(id => document.getElementById(id));
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(a => {
+          a.style.background = a.getAttribute('href') === '#' + id ? '#26102a' : '';
+          a.style.color      = a.getAttribute('href') === '#' + id ? '#eec8ee' : '';
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  sections.forEach(s => s && observer.observe(s));
+</script>
+</body>
+</html>
