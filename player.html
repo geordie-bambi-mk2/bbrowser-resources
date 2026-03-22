@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BambiBrowser+ — Player</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#120812; --card:#1c0b1f; --line:#2e0e2e; --text:#eec8ee; --muted:#8a61a3; --accent:#ff9bff; }
+    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; }
+    .wrap { max-width: 860px; margin: 0 auto; padding: 24px 18px 60px; }
+    .top { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px; }
+    a.btn { text-decoration:none; color:#dca0ea; border:1px solid #5a2a5a; border-radius:8px; padding:7px 12px; font-size:.78rem; }
+    a.btn:hover { background:#26102a; }
+    h1 { font-size:1.5rem; color:var(--accent); margin-bottom:8px; }
+    p { color:var(--muted); margin-bottom:18px; }
+    .grid { display:grid; gap:12px; grid-template-columns:1fr; }
+    @media (min-width:760px){ .grid{grid-template-columns:1fr 1fr;} }
+    .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; }
+    .card h2 { font-size:.95rem; margin-bottom:6px; }
+    ul { margin-left:18px; color:#cfa4d8; line-height:1.6; }
+    code { background:#1e0a1e; border:1px solid #4a2050; border-radius:5px; padding:1px 6px; color:#ffb6ff; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <a class="btn" href="index.html">Guide Home</a>
+      <a class="btn" href="boot.html">Next: Boot</a>
+      <a class="btn" href="features.html#player">Full Detailed Page</a>
+    </div>
+    <h1>Start Bambi Player</h1>
+    <p>The extension sends URLs to the helper running on <code>http://127.0.0.1:5655</code>.</p>
+
+    <div class="grid">
+      <div class="card">
+        <h2>Single monitor</h2>
+        <ul>
+          <li>Run <code>bambi_player.exe</code>.</li>
+          <li>Confirm the tray icon appears.</li>
+          <li>When online, popup status dot is green.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2>Multi-monitor</h2>
+        <ul>
+          <li>Run <code>.\start_bambi_player_multimon.ps1</code>.</li>
+          <li>Primary display carries audio.</li>
+          <li>Other displays mirror video muted.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

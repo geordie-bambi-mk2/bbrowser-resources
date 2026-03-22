@@ -348,12 +348,12 @@
   </a>
   <div class="nav-links">
     <a href="index.html">Guide Home</a>
-    <a href="#install">Install</a>
-    <a href="#player">Player</a>
-    <a href="#boot">Boot</a>
-    <a href="#usage">Using It</a>
-    <a href="#input-lock">Input Lock</a>
-    <a href="#auto-play">Auto-Play</a>
+    <a href="install.html">Install</a>
+    <a href="player.html">Player</a>
+    <a href="boot.html">Boot</a>
+    <a href="usage.html">Using It</a>
+    <a href="input-lock.html">Input Lock</a>
+    <a href="auto-play.html">Auto-Play</a>
   </div>
 </nav>
 
@@ -638,7 +638,7 @@
     <div class="section-eyebrow">v5.2 Feature <span class="badge-new" style="font-size:0.58rem;padding:2px 7px;vertical-align:middle;margin-left:4px">NEW</span></div>
     <h2 class="section-h2">Input Lock Timer</h2>
     <p class="section-lead">
-      In multi-monitor mode, keyboard and pointer locks are always active while a video plays. In single-monitor mode these locks are now optional — enable <em>Input lock</em> and choose how long before they release automatically.
+      In multi-monitor mode, keyboard and pointer locks are always active while a video plays. In single-monitor mode these locks are optional — and you can start a lockdown timer that prevents turning input lock off for a chosen duration.
     </p>
 
     <div class="feature-block">
@@ -662,15 +662,15 @@
 
         <div class="ui-item">
           <div class="ui-item-label">General tab → Playback section</div>
-          <div class="ui-item-name" style="margin-bottom:8px">Auto-release after</div>
+          <div class="ui-item-name" style="margin-bottom:8px">Lockdown duration</div>
           <div class="inline-select-row">
-            <span class="inline-select-label">Auto-release after</span>
+            <span class="inline-select-label">Lockdown duration</span>
             <span class="inline-select-mock">1 hour ▾</span>
           </div>
           <div class="ui-item-desc">
-            Only visible when <em>Input lock</em> is enabled. Choose how long the lock stays active before it releases on its own:<br><br>
+            Only visible when <em>Input lock</em> is enabled. Choose how long lockdown should prevent disabling input lock:<br><br>
             10 minutes · 20 minutes · 1 hour (default) · 2 hours · 4 hours · 6 hours · 8 hours · 12 hours<br><br>
-            When the timer fires, the keyboard lock, pointer lock, and key-suppression listener are all removed automatically without needing any interaction. If you exit fullscreen before the timer expires, the timer is cancelled.
+            Then click <strong style="color:var(--text)">Start Lockdown</strong>. During lockdown, input lock cannot be disabled from settings. When the timer expires, input lock is <strong style="color:var(--text)">not turned off automatically</strong> — the timer only unlocks the setting so you can disable it yourself if you want.
           </div>
         </div>
 
@@ -681,7 +681,7 @@
 
         <div class="callout warn">
           <span class="callout-icon">⚠</span>
-          <span>While the input lock is active, keyboard shortcuts and mouse movement are suppressed in the browser. VLC still receives all input normally through its own window. Press the VLC fullscreen shortcut or wait for the auto-release timer if you need control back early.</span>
+          <span>While input lock is active, keyboard shortcuts and mouse movement are suppressed in the browser. VLC still receives input normally through its own window. In multi-monitor mode, input lock is always forced on. In single-monitor mode, lockdown only controls whether the setting can be switched off.</span>
         </div>
 
       </div>
