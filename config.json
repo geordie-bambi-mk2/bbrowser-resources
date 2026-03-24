@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "extensionVersion": "5.21",
   "adDomains": [
     "exoclick.com", "a4d.com", "adultadworld.com", "trafficjunky.com", "popads.net",
@@ -127,11 +127,13 @@
   "domains": {
     "pornhub.com":        ["ev.phncdn.com"],
     "pornhubpremium.com": ["ev.phncdn.com"],
+    "youporn.com":        ["ypncdn.com", "phncdn.com"],
     "xhamster.com":  ["xhcdn.com"],
     "xvideos.com":   ["xvideos-cdn.com"],
     "xnxx.com":      ["xnxx-cdn.com"],
     "spankbang.com": ["sb-cd.com"],
-    "redtube.com":   ["rdtcdn.com"]
+    "redtube.com":   ["rdtcdn.com", "phncdn.com"],
+    "eporner.com":   ["aucdn.net", "static-eu-cdn.eporner.com"]
   },
   "presets": [
     {
@@ -203,22 +205,62 @@
       "id": "xvideos",
       "label": "xVideos",
       "domain": "xvideos.com",
-      "subdomains": ["xvideos-cdn.com"],
+      "subdomains": ["xvideos-cdn.com", "xvideos.red"],
       "mode": "manual",
       "ignorePaths": ["/channels-index", "/pornstars-index", "/profileslist", "/search/"],
       "playerHints": {
-        "containerSelectors": ["#video-player-bg", "#video-player", ".video-bg", "#player"]
+        "containerSelectors": ["#video-player-bg", "#html5video", "#hlsplayer", "#video-player", ".video-bg", "#player"],
+        "preferredVideoSelectors": [
+          "#video-player-bg #html5video #hlsplayer video",
+          "#video-player-bg #hlsplayer video",
+          "#html5video #hlsplayer video",
+          "#hlsplayer video",
+          "#html5video video",
+          "#hlsplayer .video-bg-pic > video"
+        ],
+        "blockedVideoSelectors": [
+          "#html5video .video-overlay video",
+          ".video-overlay video.video-overlay",
+          "#video-right video[id^='exo-video-']",
+          "#video-right .exo-ad-playersiderectangle video"
+        ],
+        "blockedContainerSelectors": [
+          "#html5video .video-overlay",
+          ".video-overlay",
+          "#video-right",
+          "#video-right.exo-ad-ins-container",
+          ".exo-ad-playersiderectangle"
+        ]
       }
     },
     {
       "id": "xhamster",
       "label": "xHamster",
       "domain": "xhamster.com",
-      "subdomains": ["xhcdn.com"],
+      "subdomains": ["xhcdn.com", "saawsedge.com"],
       "mode": "manual",
       "ignorePaths": ["/categories", "/pornstars", "/channels", "/photos", "/creators", "/dating", "/my/"],
       "playerHints": {
-        "containerSelectors": ["[data-role='player']", ".player-container", ".video-player", "#player"]
+        "containerSelectors": ["#player-container", ".player-container__player", "[data-role='xplayer']", "[data-role='player']", ".player-container", ".video-player", "#player"],
+        "preferredVideoSelectors": [
+          "#xplayer__video",
+          "#player-container video#xplayer__video",
+          "[data-role='xplayer'] > video#xplayer__video",
+          ".player-container__player > video#xplayer__video"
+        ],
+        "blockedVideoSelectors": [
+          "#player-container.xplayer-ads video#xplayer__video",
+          "[data-role='xplayer'].xplayer-ads video#xplayer__video",
+          "#player-container.xplayer-ads-loading video#xplayer__video",
+          "#player-container.xplayer-ads-preload video#xplayer__video"
+        ],
+        "blockedContainerSelectors": [
+          "#player-container.xplayer-ads",
+          "#player-container.xplayer-ads-loading",
+          "#player-container.xplayer-ads-preload",
+          "#player-container.xplayer-preroll-skip-after-progress",
+          ".xplayer-ads-block"
+        ]
       }
     },
     {
@@ -229,7 +271,28 @@
       "mode": "manual",
       "ignorePaths": ["/search/"],
       "playerHints": {
-        "containerSelectors": ["#video-player-bg", "#video-player", ".video-bg"]
+        "containerSelectors": ["#video-player-bg", "#html5video", "#hlsplayer", "#video-player", ".video-bg"],
+        "preferredVideoSelectors": [
+          "#video-player-bg #html5video #hlsplayer video",
+          "#video-player-bg #hlsplayer video",
+          "#html5video #hlsplayer video",
+          "#hlsplayer video",
+          "#html5video video",
+          "#hlsplayer .video-bg-pic > video"
+        ],
+        "blockedVideoSelectors": [
+          "#html5video .video-overlay video",
+          ".video-overlay video.video-overlay",
+          "#video-right video[id^='exo-video-']",
+          "#video-right .exo-ad-playersiderectangle video"
+        ],
+        "blockedContainerSelectors": [
+          "#html5video .video-overlay",
+          ".video-overlay",
+          "#video-right",
+          "#video-right.exo-ad-ins-container",
+          ".exo-ad-playersiderectangle"
+        ]
       }
     },
     {
@@ -261,33 +324,84 @@
       "id": "redtube",
       "label": "RedTube",
       "domain": "redtube.com",
-      "subdomains": ["rdtcdn.com"],
+      "subdomains": ["rdtcdn.com", "phncdn.com"],
       "mode": "manual",
       "ignorePaths": ["/categories", "/pornstars", "/playlists", "/tags"],
       "playerHints": {
-        "containerSelectors": ["#media-player", ".video-wrap", ".player-container", "#player"]
+        "containerSelectors": ["#playerDiv_198917781", "[id^='playerDiv_']", ".rt_player.mgp_container", "#media-player", ".video-wrap", ".player-container", "#player"],
+        "preferredVideoSelectors": [
+          "[id^='playerDiv_'] .mgp_videoWrapper > video.mgp_videoElement",
+          "[id^='playerDiv_'] video.mgp_videoElement",
+          ".rt_player .mgp_videoElement",
+          ".mgp_videoWrapper > video.mgp_videoElement"
+        ],
+        "blockedVideoSelectors": [
+          "[id^='playerDiv_'].mgp_adRollRunning .mgp_videoElement",
+          "[id^='playerDiv_'].mgp_adRollReady .mgp_videoElement",
+          ".rt_player.mgp_adRollRunning .mgp_videoElement",
+          ".rt_player.mgp_adRollReady .mgp_videoElement"
+        ],
+        "blockedContainerSelectors": [
+          "[id^='playerDiv_'].mgp_adRollRunning",
+          "[id^='playerDiv_'].mgp_adRollReady",
+          ".rt_player.mgp_adRollRunning",
+          ".rt_player.mgp_adRollReady"
+        ]
       }
     },
     {
       "id": "youporn",
       "label": "YouPorn",
       "domain": "youporn.com",
-      "subdomains": [],
+      "subdomains": ["ypncdn.com", "phncdn.com"],
       "mode": "manual",
       "ignorePaths": ["/categories", "/pornstar", "/tags", "/channels", "/search", "/playlists"],
       "playerHints": {
-        "containerSelectors": ["#video-wrapper", ".play-container", ".player-wrap", "#player"]
+        "containerSelectors": ["#videoWrapper", "#videoContainer", "[data-testid='video_player_container']", "#video-wrapper", ".play-container", ".player-wrap", "#player"],
+        "preferredVideoSelectors": [
+          "#videoContainer .mgp_videoWrapper > video.mgp_videoElement",
+          "#videoContainer video.mgp_videoElement",
+          "#videoContainer .mgp_videoElement",
+          "[data-testid='video_player_container'] .mgp_videoElement",
+          "[data-testid='video_player_container'] video.mgp_videoElement"
+        ],
+        "blockedVideoSelectors": [
+          "#videoContainer.mgp_adRollRunning .mgp_videoElement",
+          "[data-testid='video_player_container'].mgp_adRollRunning .mgp_videoElement",
+          ".mgp_adRollRunning .mgp_videoElement"
+        ],
+        "blockedContainerSelectors": [
+          "#videoContainer.mgp_adRollRunning",
+          "[data-testid='video_player_container'].mgp_adRollRunning",
+          ".mgp_adRollRunning"
+        ]
       }
     },
     {
       "id": "eporner",
       "label": "EPorner",
       "domain": "eporner.com",
-      "subdomains": [],
+      "subdomains": ["aucdn.net", "static-eu-cdn.eporner.com"],
       "mode": "manual",
       "ignorePaths": ["/categories/", "/pornstars/", "/studios/", "/tags/", "/search/"],
       "playerHints": {
-        "containerSelectors": ["#player-container", ".player-wrap", "[id^='player']", "#ep-player"]
+        "containerSelectors": ["#movieplayer-box", "#moviexxx", "#EPvideo", "#player-container", ".player-wrap", "[id^='player']", "#ep-player"],
+        "preferredVideoSelectors": [
+          "#EPvideo_html5_api",
+          "#EPvideo video#EPvideo_html5_api",
+          "#moviexxx #EPvideo_html5_api"
+        ],
+        "blockedVideoSelectors": [
+          "#EPvideo.vjs-ad-playing #EPvideo_html5_api",
+          "#EPvideo .vast-blocker + .vjs-control-bar ~ #EPvideo_html5_api"
+        ],
+        "blockedContainerSelectors": [
+          "#EPvideo.vjs-ad-playing",
+          "#EPvideo .vast-blocker",
+          "#EPvideo .vast-skip-button",
+          "#EPvideo .vjs-ads-label",
+          "#EPvideo .vjs-inplayer-container"
+        ]
       }
     }
   ]
