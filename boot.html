@@ -2,51 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BambiBrowser+ — Boot</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --bg:#120812; --card:#1c0b1f; --line:#2e0e2e; --text:#eec8ee; --muted:#8a61a3; --accent:#ff9bff; }
-    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; }
-    .wrap { max-width: 860px; margin: 0 auto; padding: 24px 18px 60px; }
-    .top { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px; }
-    a.btn { text-decoration:none; color:#dca0ea; border:1px solid #5a2a5a; border-radius:8px; padding:7px 12px; font-size:.78rem; }
-    a.btn:hover { background:#26102a; }
-    h1 { font-size:1.5rem; color:var(--accent); margin-bottom:8px; }
-    p { color:var(--muted); margin-bottom:18px; }
-    .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:12px; }
-    .card h2 { font-size:.95rem; margin-bottom:6px; }
-    ul { margin-left:18px; color:#cfa4d8; line-height:1.6; }
-    code { background:#1e0a1e; border:1px solid #4a2050; border-radius:5px; padding:1px 6px; color:#ffb6ff; }
-  </style>
+  
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>BambiBrowser+ v6.1 - Boot</title>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
-  <div class="wrap">
-    <div class="top">
-      <a class="btn" href="index.html">Guide Home</a>
-      <a class="btn" href="usage.html">Next: Usage</a>
-      <a class="btn" href="features.html#boot">Full Detailed Page</a>
+  <nav class="site-nav">
+    <a class="nav-brand" href="index.html">BambiBrowser+ Guide</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="install.html">Install</a><a href="player.html">Player</a><a href="boot.html" class="active">Boot</a><a href="usage.html">Usage</a><a href="features.html#boot">Deep Dive</a>
     </div>
-    <h1>Start on Boot (Optional)</h1>
-    <p>Pick whichever method you prefer so the helper starts automatically at login.</p>
+  </nav>
 
-    <div class="card">
-      <h2>Option A: Startup folder</h2>
-      <ul>
-        <li>Press <code>Win + R</code> and run <code>shell:startup</code>.</li>
-        <li>Create a shortcut to <code>bambi_player.exe</code>.</li>
-        <li>Place the shortcut in the startup folder.</li>
-      </ul>
-    </div>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Start On Boot (Optional)</h1>
+      <p>Automatically run the helper every login so the extension is always ready without manual startup.</p>
+      <div class="hero-meta">Version v6.1</div>
+    </section>
 
-    <div class="card">
-      <h2>Option B: Task Scheduler</h2>
-      <ul>
-        <li>Create basic task, trigger: When I log on.</li>
-        <li>Action: Start a program.</li>
-        <li>Select <code>bambi_player.exe</code> and finish.</li>
-      </ul>
-    </div>
-  </div>
+    <section class="layout">
+      <aside class="sidebar">
+        <div class="side-title">Boot Options</div>
+        <ul class="side-list">
+          <li><a href="player.html">Manual Start</a></li>
+          <li><a class="active" href="boot.html">Auto-start Methods</a></li>
+          <li><a href="usage.html">Check Status</a></li>
+        </ul>
+      </aside>
+
+      <article class="panel">
+        <h2>Recommended Methods</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Option A: Startup Folder</h3>
+            <ol>
+              <li>Press <code>Win + R</code>.</li>
+              <li>Run <code>shell:startup</code>.</li>
+              <li>Create shortcut to <code>bambi_player.exe</code>.</li>
+              <li>Place shortcut in startup folder.</li>
+            </ol>
+          </div>
+          <div class="card">
+            <h3>Option B: Task Scheduler</h3>
+            <ol>
+              <li>Create a basic task.</li>
+              <li>Trigger: <strong>When I log on</strong>.</li>
+              <li>Action: <strong>Start a program</strong>.</li>
+              <li>Select <code>bambi_player.exe</code>.</li>
+            </ol>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Validation</h3>
+          <p>After reboot/login, open the extension popup. If helper status is connected, auto-start worked correctly.</p>
+        </div>
+        <div class="footer">Next: <a href="usage.html">Configure daily usage settings</a>.</div>
+      </article>
+    </section>
+  </main>
 </body>
 </html>
+

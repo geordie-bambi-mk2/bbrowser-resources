@@ -2,54 +2,71 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BambiBrowser+ — Player</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --bg:#120812; --card:#1c0b1f; --line:#2e0e2e; --text:#eec8ee; --muted:#8a61a3; --accent:#ff9bff; }
-    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; }
-    .wrap { max-width: 860px; margin: 0 auto; padding: 24px 18px 60px; }
-    .top { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px; }
-    a.btn { text-decoration:none; color:#dca0ea; border:1px solid #5a2a5a; border-radius:8px; padding:7px 12px; font-size:.78rem; }
-    a.btn:hover { background:#26102a; }
-    h1 { font-size:1.5rem; color:var(--accent); margin-bottom:8px; }
-    p { color:var(--muted); margin-bottom:18px; }
-    .grid { display:grid; gap:12px; grid-template-columns:1fr; }
-    @media (min-width:760px){ .grid{grid-template-columns:1fr 1fr;} }
-    .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; }
-    .card h2 { font-size:.95rem; margin-bottom:6px; }
-    ul { margin-left:18px; color:#cfa4d8; line-height:1.6; }
-    code { background:#1e0a1e; border:1px solid #4a2050; border-radius:5px; padding:1px 6px; color:#ffb6ff; }
-  </style>
+  
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>BambiBrowser+ v6.1 - Player</title>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
-  <div class="wrap">
-    <div class="top">
-      <a class="btn" href="index.html">Guide Home</a>
-      <a class="btn" href="boot.html">Next: Boot</a>
-      <a class="btn" href="features.html#player">Full Detailed Page</a>
+  <nav class="site-nav">
+    <a class="nav-brand" href="index.html">BambiBrowser+ Guide</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="install.html">Install</a><a href="player.html" class="active">Player</a><a href="boot.html">Boot</a><a href="usage.html">Usage</a><a href="features.html#player">Deep Dive</a>
     </div>
-    <h1>Start Bambi Player</h1>
-    <p>The extension sends URLs to the helper running on <code>http://127.0.0.1:5655</code>.</p>
+  </nav>
 
-    <div class="grid">
-      <div class="card">
-        <h2>Single monitor</h2>
-        <ul>
-          <li>Run <code>bambi_player.exe</code>.</li>
-          <li>Confirm the tray icon appears.</li>
-          <li>When online, popup status dot is green.</li>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Start Bambi Player Helper</h1>
+      <p>The helper listens on <code>http://127.0.0.1:5655</code>, launches VLC, and streams live playback status back to the extension.</p>
+      <div class="hero-meta">Version v6.1</div>
+    </section>
+
+    <section class="layout">
+      <aside class="sidebar">
+        <div class="side-title">Player Focus</div>
+        <ul class="side-list">
+          <li><a href="install.html">Install</a></li>
+          <li><a class="active" href="player.html">Start Helper</a></li>
+          <li><a href="usage.html">Popup Status</a></li>
+          <li><a href="features.html#player">Advanced Details</a></li>
         </ul>
-      </div>
-      <div class="card">
-        <h2>Multi-monitor</h2>
-        <ul>
-          <li>Run <code>.\start_bambi_player_multimon.ps1</code>.</li>
-          <li>Primary display carries audio.</li>
-          <li>Other displays mirror video muted.</li>
-        </ul>
-      </div>
-    </div>
-  </div>
+      </aside>
+
+      <article class="panel">
+        <h2>What To Start</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Run The EXE</h3>
+            <ul>
+              <li>Launch <code>bambi_player.exe</code>.</li>
+              <li>Confirm tray icon appears.</li>
+              <li>Popup should show <strong>Helper Connected</strong>.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Playback Status</h3>
+            <ul>
+              <li>When VLC is active, popup shows playing status.</li>
+              <li>Current / total / remaining time updates live.</li>
+              <li>Progress bar reflects timeline position.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Multi-monitor Behavior</h3>
+          <ul>
+            <li><strong>OFF:</strong> Primary monitor only.</li>
+            <li><strong>ON:</strong> All detected monitors.</li>
+            <li>Primary monitor carries audio, mirror displays are muted.</li>
+          </ul>
+        </div>
+
+        <div class="footer">Next: <a href="boot.html">Auto-start helper at login</a>.</div>
+      </article>
+    </section>
+  </main>
 </body>
 </html>
+

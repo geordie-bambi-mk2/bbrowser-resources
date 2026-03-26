@@ -2,52 +2,70 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BambiBrowser+ — Input Lock</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --bg:#120812; --card:#1c0b1f; --line:#2e0e2e; --text:#eec8ee; --muted:#8a61a3; --accent:#ff9bff; }
-    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; }
-    .wrap { max-width: 860px; margin: 0 auto; padding: 24px 18px 60px; }
-    .top { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px; }
-    a.btn { text-decoration:none; color:#dca0ea; border:1px solid #5a2a5a; border-radius:8px; padding:7px 12px; font-size:.78rem; }
-    a.btn:hover { background:#26102a; }
-    h1 { font-size:1.5rem; color:var(--accent); margin-bottom:8px; }
-    p { color:var(--muted); margin-bottom:18px; }
-    .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:12px; }
-    .card h2 { font-size:.95rem; margin-bottom:6px; }
-    ul, ol { margin-left:18px; color:#cfa4d8; line-height:1.6; }
-    .badge { display:inline-block; font-size:.62rem; border:1px solid #50d050; color:#50d050; border-radius:6px; padding:2px 6px; margin-left:8px; }
-  </style>
+  
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>BambiBrowser+ v6.1 - Input Lock</title>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
-  <div class="wrap">
-    <div class="top">
-      <a class="btn" href="index.html">Guide Home</a>
-      <a class="btn" href="auto-play.html">Next: Auto-Play</a>
-      <a class="btn" href="features.html#input-lock">Full Detailed Page</a>
+  <nav class="site-nav">
+    <a class="nav-brand" href="index.html">BambiBrowser+ Guide</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="usage.html">Usage</a><a href="input-lock.html" class="active">Input Lock</a><a href="auto-play.html">Auto-Play</a><a href="features.html#input-lock">Deep Dive</a>
     </div>
-    <h1>Input Lock <span class="badge">v5.2</span></h1>
-    <p>Single-monitor can opt in; multi-monitor always forces input lock ON.</p>
+  </nav>
 
-    <div class="card">
-      <h2>Rules</h2>
-      <ul>
-        <li>Multi-monitor ON: input lock is forced ON.</li>
-        <li>Multi-monitor OFF: you may toggle input lock on/off.</li>
-        <li>During lockdown, input lock setting cannot be disabled.</li>
-        <li>When lockdown timer ends, input lock remains ON; only the restriction is removed.</li>
-      </ul>
-    </div>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Input Lock</h1>
+      <p>Input lock is independent from multi-monitor. You can enable or disable it regardless of monitor mode.</p>
+      <div class="hero-meta">Version v6.1</div>
+    </section>
 
-    <div class="card">
-      <h2>How to use lockdown</h2>
-      <ol>
-        <li>Enable Input lock (or enable multi-monitor).</li>
-        <li>Select Lockdown duration.</li>
-        <li>Click Start Lockdown.</li>
-      </ol>
-    </div>
-  </div>
+    <section class="layout">
+      <aside class="sidebar">
+        <div class="side-title">Input Lock Flow</div>
+        <ul class="side-list">
+          <li><a class="active" href="input-lock.html">Rules</a></li>
+          <li><a href="usage.html">Where To Configure</a></li>
+          <li><a href="features.html#input-lock">Technical Notes</a></li>
+        </ul>
+      </aside>
+
+      <article class="panel">
+        <h2>Behavior Rules</h2>
+        <div class="card">
+          <ul>
+            <li><strong>Input lock ON:</strong> keyboard/pointer restrictions apply during VLC fullscreen sessions.</li>
+            <li><strong>Input lock OFF:</strong> playback still works, but no input restriction is enforced.</li>
+            <li>Multi-monitor and input lock are separate controls.</li>
+            <li>During lockdown, input lock cannot be toggled off.</li>
+          </ul>
+        </div>
+
+        <div class="grid-2">
+          <div class="card">
+            <h3>Lockdown Setup</h3>
+            <ol>
+              <li>Enable Input lock.</li>
+              <li>Select lockdown duration.</li>
+              <li>Press <strong>Start Lockdown</strong>.</li>
+            </ol>
+          </div>
+          <div class="card">
+            <h3>After Timer Ends</h3>
+            <ul>
+              <li>Lockdown restriction is removed.</li>
+              <li>Input lock state stays ON until manually changed.</li>
+              <li>You regain the ability to disable it.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer">Next: <a href="auto-play.html">Auto-play fallback behavior</a>.</div>
+      </article>
+    </section>
+  </main>
 </body>
 </html>
+

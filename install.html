@@ -2,49 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BambiBrowser+ — Install</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --bg:#120812; --card:#1c0b1f; --line:#2e0e2e; --text:#eec8ee; --muted:#8a61a3; --accent:#ff9bff; }
-    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; }
-    .wrap { max-width: 860px; margin: 0 auto; padding: 24px 18px 60px; }
-    .top { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px; }
-    a.btn { text-decoration:none; color:#dca0ea; border:1px solid #5a2a5a; border-radius:8px; padding:7px 12px; font-size:.78rem; }
-    a.btn:hover { background:#26102a; }
-    h1 { font-size:1.5rem; color:var(--accent); margin-bottom:8px; }
-    p { color:var(--muted); margin-bottom:18px; }
-    .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:12px; }
-    .card h2 { font-size:.95rem; margin-bottom:6px; }
-    ol { margin-left:20px; color:#cfa4d8; line-height:1.6; }
-    code { background:#1e0a1e; border:1px solid #4a2050; border-radius:5px; padding:1px 6px; color:#ffb6ff; }
-  </style>
+  
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>BambiBrowser+ v6.1 - Install</title>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
-  <div class="wrap">
-    <div class="top">
-      <a class="btn" href="index.html">Guide Home</a>
-      <a class="btn" href="player.html">Next: Player</a>
-      <a class="btn" href="features.html#install">Full Detailed Page</a>
+  <nav class="site-nav">
+    <a class="nav-brand" href="index.html">BambiBrowser+ Guide</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="install.html" class="active">Install</a><a href="player.html">Player</a><a href="boot.html">Boot</a><a href="usage.html">Usage</a><a href="features.html#install">Deep Dive</a>
     </div>
-    <h1>Install the Extension</h1>
-    <p>Quick setup for any Chromium-based browser (Chrome, Edge, Brave, Opera).</p>
+  </nav>
 
-    <div class="card">
-      <h2>Steps</h2>
-      <ol>
-        <li>Open your extensions page (for Chrome use <code>chrome://extensions/</code>).</li>
-        <li>Enable Developer Mode.</li>
-        <li>Click Load unpacked.</li>
-        <li>Select the <code>extension</code> folder in this project.</li>
-        <li>Pin BambiBrowser+ to your toolbar.</li>
-      </ol>
-    </div>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Install The Extension</h1>
+      <p>Set up BambiBrowser+ on any Chromium browser in under two minutes, then open the full settings tab from the popup cog.</p>
+      <div class="hero-meta">Version v6.1</div>
+    </section>
 
-    <div class="card">
-      <h2>Tip</h2>
-      <p>If the browser warns about unpacked/developer extensions, you can safely dismiss it for this local setup.</p>
-    </div>
-  </div>
+    <section class="layout">
+      <aside class="sidebar">
+        <div class="side-title">Setup Flow</div>
+        <ul class="side-list">
+          <li><a class="active" href="install.html">1. Load Extension</a></li>
+          <li><a href="player.html">2. Start Helper</a></li>
+          <li><a href="boot.html">3. Auto-start</a></li>
+          <li><a href="usage.html">4. Daily Usage</a></li>
+        </ul>
+      </aside>
+
+      <article class="panel">
+        <h2>Install Steps</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Browser Setup</h3>
+            <ol>
+              <li>Open <code>chrome://extensions/</code> (or equivalent).</li>
+              <li>Enable <strong>Developer mode</strong>.</li>
+              <li>Click <strong>Load unpacked</strong>.</li>
+              <li>Select this repo's <code>extension</code> folder.</li>
+            </ol>
+          </div>
+          <div class="card">
+            <h3>Post-install Checks</h3>
+            <ul>
+              <li>Pin BambiBrowser+ to the toolbar.</li>
+              <li>Open popup and confirm the compact status view appears.</li>
+              <li>Click the cog to open full-size settings in a tab.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Notes</h3>
+          <p>Unpacked extension warnings are expected in developer mode. They do not affect local functionality.</p>
+        </div>
+        <div class="footer">Next: <a href="player.html">Start the helper player</a>.</div>
+      </article>
+    </section>
+  </main>
 </body>
 </html>
+

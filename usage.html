@@ -2,51 +2,73 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BambiBrowser+ — Usage</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --bg:#120812; --card:#1c0b1f; --line:#2e0e2e; --text:#eec8ee; --muted:#8a61a3; --accent:#ff9bff; }
-    body { background: var(--bg); color: var(--text); font-family: 'Segoe UI', Tahoma, sans-serif; }
-    .wrap { max-width: 860px; margin: 0 auto; padding: 24px 18px 60px; }
-    .top { display:flex; gap:10px; flex-wrap:wrap; margin-bottom:18px; }
-    a.btn { text-decoration:none; color:#dca0ea; border:1px solid #5a2a5a; border-radius:8px; padding:7px 12px; font-size:.78rem; }
-    a.btn:hover { background:#26102a; }
-    h1 { font-size:1.5rem; color:var(--accent); margin-bottom:8px; }
-    p { color:var(--muted); margin-bottom:18px; }
-    .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; margin-bottom:12px; }
-    .card h2 { font-size:.95rem; margin-bottom:6px; }
-    ul { margin-left:18px; color:#cfa4d8; line-height:1.6; }
-  </style>
+  
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>BambiBrowser+ v6.1 - Usage</title>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
-  <div class="wrap">
-    <div class="top">
-      <a class="btn" href="index.html">Guide Home</a>
-      <a class="btn" href="input-lock.html">Next: Input Lock</a>
-      <a class="btn" href="features.html#usage">Full Detailed Page</a>
+  <nav class="site-nav">
+    <a class="nav-brand" href="index.html">BambiBrowser+ Guide</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="install.html">Install</a><a href="player.html">Player</a><a href="boot.html">Boot</a><a href="usage.html" class="active">Usage</a><a href="features.html#usage">Deep Dive</a>
     </div>
-    <h1>Using the Popup</h1>
-    <p>Main controls are under General, Domains, Manual, and Blacklist tabs.</p>
+  </nav>
 
-    <div class="card">
-      <h2>General tab</h2>
-      <ul>
-        <li>Enable hijack master toggle.</li>
-        <li>Multi-monitor toggle.</li>
-        <li>Input lock toggle + lockdown timer controls.</li>
-        <li>Auto-play fallback URL controls.</li>
-      </ul>
-    </div>
+  <main class="wrap">
+    <section class="hero">
+      <h1>Using The Extension Day-To-Day</h1>
+      <p>Popup now focuses on live status, while the settings cog opens this full-size configuration flow in its own tab.</p>
+      <div class="hero-meta">Version v6.1</div>
+    </section>
 
-    <div class="card">
-      <h2>Domains, Manual, Blacklist</h2>
-      <ul>
-        <li>Domains: add watched domains, preset one-click adds, player learning for manual sites.</li>
-        <li>Manual: shortcut trigger and local file playback to VLC.</li>
-        <li>Blacklist: URL substrings that suppress hijack.</li>
-      </ul>
-    </div>
-  </div>
+    <section class="layout">
+      <aside class="sidebar">
+        <div class="side-title">Usage Areas</div>
+        <ul class="side-list">
+          <li><a class="active" href="usage.html">Main Usage</a></li>
+          <li><a href="input-lock.html">Input Lock</a></li>
+          <li><a href="auto-play.html">Auto-Play</a></li>
+          <li><a href="features.html#usage">Advanced Behaviors</a></li>
+        </ul>
+      </aside>
+
+      <article class="panel">
+        <h2>Popup + Settings Split</h2>
+        <div class="grid-2">
+          <div class="card">
+            <h3>Compact Popup</h3>
+            <ul>
+              <li>Helper online/offline state.</li>
+              <li>Multi-monitor enabled/disabled.</li>
+              <li>Input lock enabled/disabled (lockdown aware).</li>
+              <li>Playback status + progress timeline.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Full Settings Tab</h3>
+            <ul>
+              <li>General controls and remote sync.</li>
+              <li>Domains management and presets.</li>
+              <li>Manual trigger + local file launch.</li>
+              <li>Blacklist editing.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Domains / Manual / Blacklist</h3>
+          <ul>
+            <li><strong>Domains:</strong> allow-list domains and learn manual players.</li>
+            <li><strong>Manual:</strong> keyboard trigger and direct local file playback.</li>
+            <li><strong>Blacklist:</strong> URL substrings that suppress hijack.</li>
+          </ul>
+        </div>
+
+        <div class="footer">Related: <a href="input-lock.html">Input lock behavior</a> and <a href="auto-play.html">auto-play fallback</a>.</div>
+      </article>
+    </section>
+  </main>
 </body>
 </html>
+

@@ -2,302 +2,117 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BambiBrowser+ — Guide Hub</title>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --bg:           #120812;
-      --bg-card:      #1c0b1f;
-      --bg-card-dark: #130813;
-      --border:       #2e0e2e;
-      --border-md:    #3e183e;
-      --text:         #eec8ee;
-      --text-muted:   #8a61a3;
-      --text-dim:     #5a3060;
-      --accent:       #ff9bff;
-      --accent-2:     #ff80ff;
-      --section-ttl:  #9450ad;
-      --purple-mid:   #6e1a85;
-      --purple-deep:  #5a0a70;
-      --h-from:       #3d0a3d;
-      --h-to:         #5a1060;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      line-height: 1.65;
-      min-height: 100vh;
-    }
-    .site-nav {
-      position: sticky; top: 0; z-index: 999;
-      background: var(--bg-card-dark);
-      border-bottom: 1px solid var(--border);
-      display: flex; align-items: center;
-      padding: 0 clamp(12px, 5vw, calc(50% - 430px)); gap: 0;
-    }
-    .nav-brand {
-      display: flex; align-items: center; gap: 8px;
-      padding: 11px 24px 11px 0; text-decoration: none;
-      color: var(--accent); font-size: 0.88rem; font-weight: 700;
-      letter-spacing: 0.5px; white-space: nowrap;
-      border-right: 1px solid var(--border); margin-right: 16px;
-    }
-    .nav-brand svg { width: 20px; height: 20px; flex-shrink: 0; }
-    .nav-links { display: flex; gap: 2px; flex-wrap: wrap; }
-    .nav-links a {
-      color: var(--text-muted); text-decoration: none;
-      font-size: 0.76rem; font-weight: 600; letter-spacing: 0.3px;
-      padding: 8px 11px; border-radius: 6px;
-      transition: background 0.18s, color 0.18s;
-    }
-    .nav-links a:hover { background: #26102a; color: var(--text); }
-    .nav-links a.active { background: #26102a; color: var(--text); }
-
-    .hero {
-      padding: 72px clamp(16px, 5vw, 80px) 60px;
-      text-align: center;
-      background: linear-gradient(160deg, var(--h-from) 0%, var(--h-to) 55%, #1a0428 100%);
-      border-bottom: 1px solid #6d1f83;
-    }
-    .hero-svg { width: 80px; height: 80px; margin-bottom: 22px; filter: drop-shadow(0 0 18px #c050e080); }
-    .hero h1 {
-      font-size: clamp(1.6rem, 4vw, 2.3rem); font-weight: 700;
-      color: var(--accent); letter-spacing: 1px; margin-bottom: 12px;
-    }
-    .hero-ver {
-      display: inline-block;
-      background: rgba(180, 60, 220, 0.2); border: 1px solid #9040b0;
-      color: #c892d4; font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 0.9px; padding: 3px 12px; border-radius: 20px;
-      margin-bottom: 18px; text-transform: uppercase;
-    }
-    .hero p { color: #c892d4; font-size: 0.96rem; max-width: 500px; margin: 0 auto; }
-
-    .container { max-width: 860px; margin: 0 auto; padding: 0 clamp(16px, 4vw, 40px); }
-
-    .hub-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
-      padding: 60px 0;
-    }
-    .hub-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-md);
-      border-radius: 12px;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-      display: flex; flex-direction: column;
-      transition: border-color 0.2s, transform 0.15s;
-    }
-    .hub-card:hover { border-color: var(--purple-mid); transform: translateY(-2px); }
-    .hub-card-head {
-      background: linear-gradient(90deg, #260a2e, #1c0b1f);
-      border-bottom: 1px solid var(--border);
-      padding: 18px 20px;
-      display: flex; align-items: center; gap: 12px;
-    }
-    .hub-card-icon { font-size: 1.6rem; line-height: 1; }
-    .hub-card-step {
-      font-size: 0.58rem; text-transform: uppercase;
-      letter-spacing: 1.2px; color: var(--section-ttl);
-      font-weight: 700; margin-bottom: 3px;
-    }
-    .hub-card-title { font-size: 0.95rem; font-weight: 700; color: var(--text); }
-    .hub-card-body { padding: 16px 20px; flex: 1; }
-    .hub-card-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
-    .hub-card-cta {
-      display: inline-block; margin-top: 14px;
-      color: var(--accent-2); font-size: 0.78rem;
-      font-weight: 700; letter-spacing: 0.3px;
-    }
-
-    .new-badge {
-      display: inline-block;
-      background: rgba(80, 208, 80, 0.18); color: #50d050;
-      border: 1px solid #50d050;
-      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.5px;
-      padding: 2px 7px; border-radius: 3px;
-      vertical-align: middle; margin-left: 6px;
-    }
-
-    footer {
-      background: var(--bg-card-dark); border-top: 1px solid var(--border);
-      padding: 32px 20px; text-align: center;
-      font-size: 0.72rem; color: var(--text-dim); line-height: 1.9;
-    }
-    footer a { color: #7030a0; text-decoration: none; }
-    footer a:hover { color: #bb60cc; }
-
-    .section-label {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 0.62rem; text-transform: uppercase;
-      letter-spacing: 1.6px; color: var(--section-ttl);
-      font-weight: 700; margin-bottom: 10px; padding-top: 40px;
-    }
-    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
-  </style>
+  
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>BambiBrowser+ v6.1 - Guide Home</title>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
+  <nav class="site-nav">
+    <a class="nav-brand" href="index.html">BambiBrowser+ Guide</a>
+    <div class="nav-links">
+      <a class="active" href="index.html">Home</a>
+      <a href="install.html">Install</a>
+      <a href="player.html">Player</a>
+      <a href="boot.html">Boot</a>
+      <a href="usage.html">Usage</a>
+      <a href="features.html">Deep Dive</a>
+    </div>
+  </nav>
 
-<nav class="site-nav">
-  <a class="nav-brand" href="index.html">
-    <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-      <rect width="128" height="128" rx="18" fill="#1e0022"/>
-      <ellipse cx="40" cy="36" rx="11" ry="27" fill="#9922aa" transform="rotate(-14 40 36)"/>
-      <ellipse cx="40" cy="36" rx="5"  ry="17" fill="#ee66ff" transform="rotate(-14 40 36)"/>
-      <ellipse cx="88" cy="36" rx="11" ry="27" fill="#9922aa" transform="rotate(14 88 36)"/>
-      <ellipse cx="88" cy="36" rx="5"  ry="17" fill="#ee66ff" transform="rotate(14 88 36)"/>
-      <circle cx="64" cy="83" r="31" fill="#9922aa"/>
-      <circle cx="64" cy="83" r="27" fill="#bb44cc"/>
-      <circle cx="52" cy="77" r="5" fill="#1e0022"/>
-      <circle cx="76" cy="77" r="5" fill="#1e0022"/>
-      <ellipse cx="64" cy="91" rx="5" ry="4" fill="#ff99ff"/>
-      <circle cx="104" cy="22" r="14" fill="#ee66ff"/>
-      <rect   x="101" y="14" width="6" height="16" rx="3" fill="#1e0022"/>
-      <rect   x="96"  y="19" width="16" height="6" rx="3" fill="#1e0022"/>
-    </svg>
-    BambiBrowser+
-  </a>
-  <div class="nav-links">
-    <a href="index.html" class="active">Guide Home</a>
-    <a href="install.html">Install</a>
-    <a href="player.html">Player</a>
-    <a href="boot.html">Boot</a>
-    <a href="usage.html">Using It</a>
-  </div>
-</nav>
-
-<div class="hero">
-  <svg class="hero-svg" viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg">
-    <rect width="128" height="128" rx="18" fill="#1e0022"/>
-    <ellipse cx="40" cy="36" rx="11" ry="27" fill="#9922aa" transform="rotate(-14 40 36)"/>
-    <ellipse cx="40" cy="36" rx="5"  ry="17" fill="#ee66ff" transform="rotate(-14 40 36)"/>
-    <ellipse cx="88" cy="36" rx="11" ry="27" fill="#9922aa" transform="rotate(14 88 36)"/>
-    <ellipse cx="88" cy="36" rx="5"  ry="17" fill="#ee66ff" transform="rotate(14 88 36)"/>
-    <circle cx="64" cy="83" r="31" fill="#9922aa"/>
-    <circle cx="64" cy="83" r="27" fill="#bb44cc"/>
-    <circle cx="52" cy="77" r="5" fill="#1e0022"/>
-    <circle cx="76" cy="77" r="5" fill="#1e0022"/>
-    <ellipse cx="64" cy="91" rx="5" ry="4" fill="#ff99ff"/>
-    <circle cx="104" cy="22" r="14" fill="#ee66ff"/>
-    <rect   x="101" y="14" width="6" height="16" rx="3" fill="#1e0022"/>
-    <rect   x="96"  y="19" width="16" height="6" rx="3" fill="#1e0022"/>
-  </svg>
-  <h1>BambiBrowser+ Guide</h1>
-  <div class="hero-ver">v5.2</div>
-  <p>Everything you need — from first install to all the advanced features. Pick a section below.</p>
-</div>
-
-<div class="container">
-
-  <div class="section-label">Getting Started</div>
-  <div class="hub-grid" style="padding-top:16px">
-
-    <a class="hub-card" href="install.html">
-      <div class="hub-card-head">
-        <div class="hub-card-icon">📦</div>
-        <div>
-          <div class="hub-card-step">Step 1</div>
-          <div class="hub-card-title">Install the Extension</div>
-        </div>
+  <main class="wrap">
+    <section class="hero hero-home">
+      <h1>BambiBrowser+ Guide Hub</h1>
+      <p>One place for setup, operations, and advanced behavior. The popup is now compact status-only, and settings live in a full browser tab for cleaner control.</p>
+      <div class="hero-meta">Version v6.1</div>
+      <div class="hero-actions">
+        <a class="hero-btn primary" href="install.html">Start Setup</a>
+        <a class="hero-btn" href="features.html">Open Deep Dive</a>
       </div>
-      <div class="hub-card-body">
-        <div class="hub-card-desc">Load the extension unpacked in Chrome, Edge, Brave, or Opera. Two-minute setup with Developer Mode.</div>
-        <div class="hub-card-cta">Read install guide →</div>
-      </div>
-    </a>
+    </section>
 
-    <a class="hub-card" href="player.html">
-      <div class="hub-card-head">
-        <div class="hub-card-icon">▶</div>
-        <div>
-          <div class="hub-card-step">Step 2</div>
-          <div class="hub-card-title">Start Bambi Player</div>
-        </div>
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Quick Start</h2>
+        <p>Follow this order for fastest setup.</p>
       </div>
-      <div class="hub-card-body">
-        <div class="hub-card-desc">Run the background helper that receives video URLs and launches VLC — single or multi-monitor mode.</div>
-        <div class="hub-card-cta">Read player guide →</div>
+      <div class="tile-grid">
+        <a class="tile" href="install.html">
+          <div class="tile-kicker">Step 1</div>
+          <h3>Install Extension</h3>
+          <p>Load unpacked extension in Chromium browser and pin icon.</p>
+        </a>
+        <a class="tile" href="player.html">
+          <div class="tile-kicker">Step 2</div>
+          <h3>Start Helper</h3>
+          <p>Launch bambi_player.exe and verify helper connection in popup.</p>
+        </a>
+        <a class="tile" href="boot.html">
+          <div class="tile-kicker">Step 3</div>
+          <h3>Enable Auto-start</h3>
+          <p>Optional startup folder or scheduled task for hands-off launch.</p>
+        </a>
+        <a class="tile" href="usage.html">
+          <div class="tile-kicker">Step 4</div>
+          <h3>Configure Behavior</h3>
+          <p>Domains, manual trigger, blacklist, lock options, and fallback URL.</p>
+        </a>
       </div>
-    </a>
+    </section>
 
-    <a class="hub-card" href="boot.html">
-      <div class="hub-card-head">
-        <div class="hub-card-icon">🚀</div>
-        <div>
-          <div class="hub-card-step">Step 3</div>
-          <div class="hub-card-title">Start on Boot</div>
-        </div>
+    <section class="section-block">
+      <div class="section-head">
+        <h2>What Changed In v6.1</h2>
+        <p>Workflow improvements and better visibility.</p>
       </div>
-      <div class="hub-card-body">
-        <div class="hub-card-desc">Use the Windows Startup folder or Task Scheduler so the player launches automatically every login.</div>
-        <div class="hub-card-cta">Read boot guide →</div>
+      <div class="tile-grid two-up">
+        <article class="tile static">
+          <div class="tile-kicker">UI</div>
+          <h3>Compact Popup</h3>
+          <p>Popup now focuses on live state: helper online, multi-monitor, input lock, and playback progress.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">Settings</div>
+          <h3>Full Settings Tab</h3>
+          <p>Cog opens full-size options page so controls are no longer cramped in popup dimensions.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">Playback</div>
+          <h3>Live Timeline</h3>
+          <p>Current/total/remaining playback time with progress bar from helper status endpoint.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">Control</div>
+          <h3>Independent Input Lock</h3>
+          <p>Input lock no longer depends on multi-monitor mode and can be managed with lockdown timer.</p>
+        </article>
       </div>
-    </a>
+    </section>
 
-    <a class="hub-card" href="usage.html">
-      <div class="hub-card-head">
-        <div class="hub-card-icon">🐰</div>
-        <div>
-          <div class="hub-card-step">Step 4</div>
-          <div class="hub-card-title">Using the Extension</div>
-        </div>
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Documentation Paths</h2>
+        <p>Choose detail level based on what you need.</p>
       </div>
-      <div class="hub-card-body">
-        <div class="hub-card-desc">All four popup tabs explained — General, Domains, Manual Trigger, and Blacklist. Includes AUTO vs MANUAL domain modes.</div>
-        <div class="hub-card-cta">Read usage guide →</div>
+      <div class="doc-paths">
+        <a class="path-card" href="usage.html">
+          <h3>Task-Oriented Pages</h3>
+          <p>Install, helper startup, boot setup, usage, input lock, auto-play.</p>
+        </a>
+        <a class="path-card" href="features.html">
+          <h3>Single Deep-Dive</h3>
+          <p>Long-form technical behavior and end-to-end lifecycle in one page.</p>
+        </a>
       </div>
-    </a>
+    </section>
 
-  </div>
-
-  <div class="section-label">v5.2 Features</div>
-  <div class="hub-grid" style="padding-top:16px; padding-bottom:60px">
-
-    <a class="hub-card" href="input-lock.html">
-      <div class="hub-card-head">
-        <div class="hub-card-icon">🔒</div>
-        <div>
-          <div class="hub-card-step">New in 5.2 <span class="new-badge">NEW</span></div>
-          <div class="hub-card-title">Input Lock Timer</div>
-        </div>
-      </div>
-      <div class="hub-card-body">
-        <div class="hub-card-desc">Lock keyboard and pointer during single-monitor sessions with an automatic release timer — 10 min up to 12 hours.</div>
-        <div class="hub-card-cta">Read input lock docs →</div>
-      </div>
-    </a>
-
-    <a class="hub-card" href="auto-play.html">
-      <div class="hub-card-head">
-        <div class="hub-card-icon">🔄</div>
-        <div>
-          <div class="hub-card-step">New in 5.2 <span class="new-badge">NEW</span></div>
-          <div class="hub-card-title">Auto-Play Fallback</div>
-        </div>
-      </div>
-      <div class="hub-card-body">
-        <div class="hub-card-desc">Automatically open a fallback URL in a new tab if no video has been detected for the configured idle time.</div>
-        <div class="hub-card-cta">Read auto-play docs →</div>
-      </div>
-    </a>
-
-  </div>
-
-</div>
-
-<footer>
-  <div>
-    BambiBrowser+ v5.2 &nbsp;·&nbsp;
-    Based on <a href="https://github.com/sissy3city/BambiBrowser" target="_blank">BambiBrowser</a> by sissy3city &nbsp;·&nbsp;
-    Extended by <a href="https://github.com/geordie-bambi-mk2" target="_blank">geordie-bambi-mk2</a>
-  </div>
-</footer>
-
+    <footer class="footer-block">
+      BambiBrowser+ v6.1 · Based on
+      <a href="https://github.com/sissy3city/BambiBrowser" target="_blank">BambiBrowser</a>
+      by sissy3city · Extended by
+      <a href="https://github.com/geordie-bambi-mk2" target="_blank">geordie-bambi-mk2</a>
+    </footer>
+  </main>
 </body>
 </html>
+
