@@ -2,68 +2,67 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <title>BambiBrowser+ v6.1 - Auto-Play Fallback</title>
+  <title>BambiBrowser+ v6.2 - Auto-Play Fallback</title>
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
   <nav class="site-nav">
     <a class="nav-brand" href="index.html">BambiBrowser+ Guide</a>
     <div class="nav-links">
-      <a href="index.html">Home</a><a href="usage.html">Usage</a><a href="input-lock.html">Input Lock</a><a href="auto-play.html" class="active">Auto-Play</a><a href="features.html#auto-play">Deep Dive</a>
+      <a href="index.html">Home</a>
+      <a href="usage.html">Usage</a>
+      <a href="input-lock.html">Input Lock</a>
+      <a href="auto-play.html" class="active">Auto-Play</a>
+      <a href="settings-preview.html">Preview</a>
+      <a href="features.html">Deep Dive</a>
     </div>
   </nav>
 
   <main class="wrap">
+    <div class="page-crumb"><a href="index.html">Home</a><span>></span>Auto-Play</div>
+
     <section class="hero">
       <h1>Auto-Play Fallback</h1>
       <p>If Bambi Mode is active and no video is sent to VLC before idle timeout, the extension can open a fallback URL automatically.</p>
-      <div class="hero-meta">Version v6.1</div>
+      <div class="hero-meta">Version v6.2</div>
     </section>
 
-    <section class="layout">
-      <aside class="sidebar">
-        <div class="side-title">Fallback Flow</div>
-        <ul class="side-list">
-          <li><a class="active" href="auto-play.html">Setup</a></li>
-          <li><a href="usage.html">General Usage</a></li>
-          <li><a href="features.html#auto-play">Advanced Notes</a></li>
-        </ul>
-      </aside>
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Configuration Steps</h2>
+        <p>Set once, then fallback runs automatically during idle sessions.</p>
+      </div>
+      <div class="tile-grid">
+        <article class="tile static"><div class="tile-kicker">Step 1</div><h3>Enable Fallback</h3><p>Turn on <strong>Open URL if no video found</strong> in settings.</p></article>
+        <article class="tile static"><div class="tile-kicker">Step 2</div><h3>Choose URL</h3><p>Provide a fallback URL that has reliable playable video content.</p></article>
+        <article class="tile static"><div class="tile-kicker">Step 3</div><h3>Set Delay</h3><p>Pick idle delay long enough to avoid unwanted tab openings.</p></article>
+        <article class="tile static"><div class="tile-kicker">Step 4</div><h3>Validate</h3><p>Run a short idle test and confirm the fallback tab opens as expected.</p></article>
+      </div>
+    </section>
 
-      <article class="panel">
-        <h2>Configuration</h2>
-        <div class="grid-2">
-          <div class="card">
-            <h3>How To Enable</h3>
-            <ol>
-              <li>Turn on <strong>Open URL if no video found</strong>.</li>
-              <li>Enter fallback URL.</li>
-              <li>Choose idle delay window.</li>
-            </ol>
-          </div>
-          <div class="card">
-            <h3>Recommended URL</h3>
-            <ul>
-              <li>Use a URL on an allowed domain.</li>
-              <li>Avoid static pages with no playable videos.</li>
-              <li>Prefer pages where your normal flow starts.</li>
-            </ul>
-          </div>
-        </div>
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Runtime Behavior</h2>
+      </div>
+      <div class="tile-grid two-up">
+        <article class="tile static"><div class="tile-kicker">Timer</div><h3>Idle Countdown</h3><p>Countdown runs while Bambi Mode is active and no successful VLC send occurs.</p></article>
+        <article class="tile static"><div class="tile-kicker">Suppress</div><h3>Active Playback Guard</h3><p>When helper reports likely active playback, fallback is deferred until safe.</p></article>
+        <article class="tile static"><div class="tile-kicker">Trigger</div><h3>Open New Tab</h3><p>On timeout with no send, fallback URL is opened by the extension runtime.</p></article>
+        <article class="tile static"><div class="tile-kicker">Cancel</div><h3>Successful Send</h3><p>When VLC send succeeds, fallback is cancelled for the current session context.</p></article>
+      </div>
+      <div class="callout">Use fallback URLs on allowed domains whenever possible to keep behavior predictable.</div>
+    </section>
 
-        <div class="card">
-          <h3>Runtime Behavior</h3>
-          <ul>
-            <li>Timer runs while Bambi Mode is enabled and page remains idle for playback.</li>
-            <li>When timeout hits with no VLC send, fallback URL opens in a new tab.</li>
-            <li>Successful VLC send cancels fallback for that active session.</li>
-          </ul>
-        </div>
-
-        <div class="footer">Back to: <a href="usage.html">Usage overview</a>.</div>
-      </article>
+    <section class="section-block">
+      <div class="section-head"><h2>Related</h2></div>
+      <div class="related-row">
+        <a class="tile" href="usage.html"><div class="tile-kicker">Context</div><h3>Usage</h3><p>Main day-to-day controls overview.</p></a>
+        <a class="tile" href="input-lock.html"><div class="tile-kicker">Control</div><h3>Input Lock</h3><p>Keyboard and mouse lock behavior.</p></a>
+        <a class="tile" href="settings-preview.html"><div class="tile-kicker">Preview</div><h3>Settings UI</h3><p>Visual mock of fallback settings section.</p></a>
+        <a class="tile" href="features.html#auto-play"><div class="tile-kicker">Reference</div><h3>Deep Dive Anchor</h3><p>Technical fallback lifecycle details.</p></a>
+      </div>
     </section>
   </main>
 </body>

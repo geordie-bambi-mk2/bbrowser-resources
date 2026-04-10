@@ -2,68 +2,72 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <title>BambiBrowser+ v6.1 - Input Lock</title>
+  <title>BambiBrowser+ v6.2 - Input Lock</title>
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
   <nav class="site-nav">
     <a class="nav-brand" href="index.html">BambiBrowser+ Guide</a>
     <div class="nav-links">
-      <a href="index.html">Home</a><a href="usage.html">Usage</a><a href="input-lock.html" class="active">Input Lock</a><a href="auto-play.html">Auto-Play</a><a href="features.html#input-lock">Deep Dive</a>
+      <a href="index.html">Home</a>
+      <a href="usage.html">Usage</a>
+      <a href="input-lock.html" class="active">Input Lock</a>
+      <a href="auto-play.html">Auto-Play</a>
+      <a href="settings-preview.html">Preview</a>
+      <a href="features.html">Deep Dive</a>
     </div>
   </nav>
 
   <main class="wrap">
+    <div class="page-crumb"><a href="index.html">Home</a><span>></span>Input Lock</div>
+
     <section class="hero">
       <h1>Input Lock</h1>
-      <p>Input lock is independent from multi-monitor. You can enable or disable it regardless of monitor mode.</p>
-      <div class="hero-meta">Version v6.1</div>
+      <p>Input lock is separate from multi-monitor mode and now works without admin rights using low-level keyboard and mouse hooks.</p>
+      <div class="hero-meta">Version v6.2</div>
     </section>
 
-    <section class="layout">
-      <aside class="sidebar">
-        <div class="side-title">Input Lock Flow</div>
-        <ul class="side-list">
-          <li><a class="active" href="input-lock.html">Rules</a></li>
-          <li><a href="usage.html">Where To Configure</a></li>
-          <li><a href="features.html#input-lock">Technical Notes</a></li>
-        </ul>
-      </aside>
-
-      <article class="panel">
+    <section class="section-block">
+      <div class="section-head">
         <h2>Behavior Rules</h2>
-        <div class="card">
-          <ul>
-            <li><strong>Input lock ON:</strong> keyboard/pointer restrictions apply during VLC fullscreen sessions.</li>
-            <li><strong>Input lock OFF:</strong> playback still works, but no input restriction is enforced.</li>
-            <li>Multi-monitor and input lock are separate controls.</li>
-            <li>During lockdown, input lock cannot be toggled off.</li>
-          </ul>
-        </div>
+      </div>
+      <div class="tile-grid two-up">
+        <article class="tile static"><div class="tile-kicker">When On</div><h3>Keyboard + Mouse Block</h3><p>Input events are swallowed during active VLC lock sessions.</p></article>
+        <article class="tile static"><div class="tile-kicker">When Off</div><h3>Playback Only</h3><p>VLC playback still launches, but input remains unrestricted.</p></article>
+        <article class="tile static"><div class="tile-kicker">Independent</div><h3>Separate Toggle</h3><p>Input lock can be managed regardless of multi-monitor setting.</p></article>
+        <article class="tile static"><div class="tile-kicker">Lockdown</div><h3>Timed Enforcement</h3><p>During lockdown, users cannot toggle lock off until timer expiry.</p></article>
+      </div>
+      <div class="callout">System security shortcuts like Ctrl+Alt+Del are OS-level and cannot be blocked by user-space applications.</div>
+    </section>
 
-        <div class="grid-2">
-          <div class="card">
-            <h3>Lockdown Setup</h3>
-            <ol>
-              <li>Enable Input lock.</li>
-              <li>Select lockdown duration.</li>
-              <li>Press <strong>Start Lockdown</strong>.</li>
-            </ol>
-          </div>
-          <div class="card">
-            <h3>After Timer Ends</h3>
-            <ul>
-              <li>Lockdown restriction is removed.</li>
-              <li>Input lock state stays ON until manually changed.</li>
-              <li>You regain the ability to disable it.</li>
-            </ul>
-          </div>
-        </div>
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Lockdown Flow</h2>
+      </div>
+      <div class="tile-grid two-up">
+        <article class="tile static">
+          <div class="tile-kicker">Setup</div>
+          <h3>Start Lockdown</h3>
+          <p>Enable input lock, choose a duration, and start lockdown from settings.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">After Expiry</div>
+          <h3>Toggle Restored</h3>
+          <p>Lockdown enforcement ends and user control returns while retaining current lock state.</p>
+        </article>
+      </div>
+    </section>
 
-        <div class="footer">Next: <a href="auto-play.html">Auto-play fallback behavior</a>.</div>
-      </article>
+    <section class="section-block">
+      <div class="section-head"><h2>Related</h2></div>
+      <div class="related-row">
+        <a class="tile" href="usage.html"><div class="tile-kicker">Context</div><h3>Usage</h3><p>Where lock settings live in normal workflow.</p></a>
+        <a class="tile" href="settings-preview.html"><div class="tile-kicker">Preview</div><h3>Settings UI</h3><p>Visual mock of the lock section layout.</p></a>
+        <a class="tile" href="auto-play.html"><div class="tile-kicker">Fallback</div><h3>Auto-Play</h3><p>Configure idle fallback behavior.</p></a>
+        <a class="tile" href="features.html#input-lock"><div class="tile-kicker">Reference</div><h3>Deep Dive Anchor</h3><p>Technical lifecycle details for lock handling.</p></a>
+      </div>
     </section>
   </main>
 </body>

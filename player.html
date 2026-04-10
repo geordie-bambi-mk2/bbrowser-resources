@@ -2,70 +2,144 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <title>BambiBrowser+ v6.1 - Player</title>
+  <title>BambiBrowser+ v6.2 - Player</title>
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
   <nav class="site-nav">
     <a class="nav-brand" href="index.html">BambiBrowser+ Guide</a>
     <div class="nav-links">
-      <a href="index.html">Home</a><a href="install.html">Install</a><a href="player.html" class="active">Player</a><a href="boot.html">Boot</a><a href="usage.html">Usage</a><a href="features.html#player">Deep Dive</a>
+      <a href="index.html">Home</a>
+      <a href="install.html">Install</a>
+      <a href="player.html" class="active">Player</a>
+      <a href="boot.html">Boot</a>
+      <a href="usage.html">Usage</a>
+      <a href="features.html">Deep Dive</a>
     </div>
   </nav>
 
   <main class="wrap">
+    <div class="page-crumb"><a href="index.html">Home</a><span>›</span>Player</div>
+
     <section class="hero">
       <h1>Start Bambi Player Helper</h1>
       <p>The helper listens on <code>http://127.0.0.1:5655</code>, launches VLC, and streams live playback status back to the extension.</p>
-      <div class="hero-meta">Version v6.1</div>
+      <div class="hero-meta">Version v6.2 · Step 2 of 4</div>
     </section>
 
-    <section class="layout">
-      <aside class="sidebar">
-        <div class="side-title">Player Focus</div>
-        <ul class="side-list">
-          <li><a href="install.html">Install</a></li>
-          <li><a class="active" href="player.html">Start Helper</a></li>
-          <li><a href="usage.html">Popup Status</a></li>
-          <li><a href="features.html#player">Advanced Details</a></li>
-        </ul>
-      </aside>
-
-      <article class="panel">
-        <h2>What To Start</h2>
-        <div class="grid-2">
-          <div class="card">
-            <h3>Run The EXE</h3>
-            <ul>
-              <li>Launch <code>bambi_player.exe</code>.</li>
-              <li>Confirm tray icon appears.</li>
-              <li>Popup should show <strong>Helper Connected</strong>.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Playback Status</h3>
-            <ul>
-              <li>When VLC is active, popup shows playing status.</li>
-              <li>Current / total / remaining time updates live.</li>
-              <li>Progress bar reflects timeline position.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>Multi-monitor Behavior</h3>
-          <ul>
-            <li><strong>OFF:</strong> Primary monitor only.</li>
-            <li><strong>ON:</strong> All detected monitors.</li>
-            <li>Primary monitor carries audio, mirror displays are muted.</li>
-          </ul>
-        </div>
-
-        <div class="footer">Next: <a href="boot.html">Auto-start helper at login</a>.</div>
-      </article>
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Starting The Helper</h2>
+        <p>The helper runs as a tray application with no visible window.</p>
+      </div>
+      <div class="tile-grid">
+        <article class="tile static">
+          <div class="tile-kicker">Launch</div>
+          <h3>Run The EXE</h3>
+          <p>Double-click <code>bambi_player.exe</code>. A tray icon appears in the system notification area.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">Verify</div>
+          <h3>Check Popup</h3>
+          <p>Open the browser extension popup. Status should show <strong>Helper Connected</strong> in green.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">Stop</div>
+          <h3>Exit via Tray</h3>
+          <p>Right-click the tray icon and select <strong>Exit</strong> to stop the helper cleanly.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">Logs</div>
+          <h3>bambi_player.log</h3>
+          <p>Log file sits alongside the EXE. Check it if the helper fails to start or VLC doesn't launch.</p>
+        </article>
+      </div>
     </section>
+
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Live Playback Status</h2>
+        <p>The popup reflects the helper's live state while VLC is running.</p>
+      </div>
+      <div class="tile-grid two-up">
+        <article class="tile static">
+          <div class="tile-kicker">Progress</div>
+          <h3>Timeline Display</h3>
+          <p>Current position, total duration, and remaining time update live. A progress bar reflects the timeline fraction reported by the RC interface.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">State</div>
+          <h3>Session Info</h3>
+          <p>Popup shows how many VLC instances launched and whether multi-monitor mode is active for the current session.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Multi-Monitor Behavior</h2>
+        <p>Controlled by the toggle in the extension popup.</p>
+      </div>
+      <div class="tile-grid">
+        <article class="tile static">
+          <div class="tile-kicker">Off</div>
+          <h3>Primary Only</h3>
+          <p>VLC launches fullscreen on the primary monitor only. Other displays are left untouched.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">On</div>
+          <h3>All Monitors</h3>
+          <p>VLC launches fullscreen on every detected display simultaneously with the same content.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">Audio</div>
+          <h3>Primary Only</h3>
+          <p>Only the primary monitor instance carries audio. Mirror displays are muted.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">RC</div>
+          <h3>Status Channel</h3>
+          <p>The primary VLC instance exposes a local RC port so the helper can query playback position and state.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Continue Setup</h2>
+      </div>
+      <div class="related-row">
+        <a class="tile" href="boot.html">
+          <div class="tile-kicker">Next — Step 3</div>
+          <h3>Auto-start</h3>
+          <p>Launch the helper automatically at login.</p>
+        </a>
+        <a class="tile" href="usage.html">
+          <div class="tile-kicker">Step 4</div>
+          <h3>Configure Usage</h3>
+          <p>Domains, input lock, and fallback settings.</p>
+        </a>
+        <a class="tile" href="input-lock.html">
+          <div class="tile-kicker">Related</div>
+          <h3>Input Lock</h3>
+          <p>How keyboard and mouse blocking works during sessions.</p>
+        </a>
+        <a class="tile" href="features.html">
+          <div class="tile-kicker">Reference</div>
+          <h3>Deep Dive</h3>
+          <p>Full technical behavior in one page.</p>
+        </a>
+      </div>
+    </section>
+
+    <footer class="footer-block">
+      BambiBrowser+ v6.2 · Based on
+      <a href="https://github.com/sissy3city/BambiBrowser" target="_blank">BambiBrowser</a>
+      by sissy3city · Extended by
+      <a href="https://github.com/geordie-bambi-mk2" target="_blank">geordie-bambi-mk2</a>
+    </footer>
   </main>
 </body>
 </html>

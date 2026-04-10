@@ -2,71 +2,75 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <title>BambiBrowser+ v6.1 - Usage</title>
+  <title>BambiBrowser+ v6.2 - Usage</title>
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
   <nav class="site-nav">
     <a class="nav-brand" href="index.html">BambiBrowser+ Guide</a>
     <div class="nav-links">
-      <a href="index.html">Home</a><a href="install.html">Install</a><a href="player.html">Player</a><a href="boot.html">Boot</a><a href="usage.html" class="active">Usage</a><a href="features.html#usage">Deep Dive</a>
+      <a href="index.html">Home</a>
+      <a href="install.html">Install</a>
+      <a href="player.html">Player</a>
+      <a href="boot.html">Boot</a>
+      <a href="usage.html" class="active">Usage</a>
+      <a href="settings-preview.html">Preview</a>
+      <a href="features.html">Deep Dive</a>
     </div>
   </nav>
 
   <main class="wrap">
+    <div class="page-crumb"><a href="index.html">Home</a><span>></span>Usage</div>
+
     <section class="hero">
       <h1>Using The Extension Day-To-Day</h1>
-      <p>Popup now focuses on live status, while the settings cog opens this full-size configuration flow in its own tab.</p>
-      <div class="hero-meta">Version v6.1</div>
+      <p>Popup focuses on runtime status while full settings live in a dedicated browser tab opened from the cog icon.</p>
+      <div class="hero-meta">Version v6.2 · Step 4 of 4</div>
     </section>
 
-    <section class="layout">
-      <aside class="sidebar">
-        <div class="side-title">Usage Areas</div>
-        <ul class="side-list">
-          <li><a class="active" href="usage.html">Main Usage</a></li>
-          <li><a href="input-lock.html">Input Lock</a></li>
-          <li><a href="auto-play.html">Auto-Play</a></li>
-          <li><a href="features.html#usage">Advanced Behaviors</a></li>
-        </ul>
-      </aside>
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Status In Popup</h2>
+        <p>Quick operational checks without leaving the current tab.</p>
+      </div>
+      <div class="tile-grid">
+        <article class="tile static"><div class="tile-kicker">Helper</div><h3>Connection State</h3><p>Shows online/offline health for local helper endpoint.</p></article>
+        <article class="tile static"><div class="tile-kicker">Display</div><h3>Multi-monitor State</h3><p>Reflects whether VLC will launch on primary only or all screens.</p></article>
+        <article class="tile static"><div class="tile-kicker">Control</div><h3>Input Lock State</h3><p>Shows enabled/disabled and lockdown-aware status.</p></article>
+        <article class="tile static"><div class="tile-kicker">Playback</div><h3>Live Timeline</h3><p>Current, total, and remaining time with progress bar.</p></article>
+      </div>
+    </section>
 
-      <article class="panel">
-        <h2>Popup + Settings Split</h2>
-        <div class="grid-2">
-          <div class="card">
-            <h3>Compact Popup</h3>
-            <ul>
-              <li>Helper online/offline state.</li>
-              <li>Multi-monitor enabled/disabled.</li>
-              <li>Input lock enabled/disabled (lockdown aware).</li>
-              <li>Playback status + progress timeline.</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3>Full Settings Tab</h3>
-            <ul>
-              <li>General controls and remote sync.</li>
-              <li>Domains management and presets.</li>
-              <li>Manual trigger + local file launch.</li>
-              <li>Blacklist editing.</li>
-            </ul>
-          </div>
-        </div>
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Settings In Full Tab</h2>
+        <p>Use the cog icon to open the full controls.</p>
+      </div>
+      <div class="tile-grid two-up">
+        <article class="tile static">
+          <div class="tile-kicker">Core</div>
+          <h3>General + Domains</h3>
+          <p>Activation, domain allow-listing, remote config sync, and learned player hints.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">Advanced</div>
+          <h3>Manual + Fallback + Lock</h3>
+          <p>Manual trigger shortcuts, auto-play fallback URL/timers, and input lock controls.</p>
+        </article>
+      </div>
+      <div class="callout">Need a visual first? Open <a href="settings-preview.html">Settings Preview</a> to see the full-page layout mock before configuring live options.</div>
+    </section>
 
-        <div class="card">
-          <h3>Domains / Manual / Blacklist</h3>
-          <ul>
-            <li><strong>Domains:</strong> allow-list domains and learn manual players.</li>
-            <li><strong>Manual:</strong> keyboard trigger and direct local file playback.</li>
-            <li><strong>Blacklist:</strong> URL substrings that suppress hijack.</li>
-          </ul>
-        </div>
-
-        <div class="footer">Related: <a href="input-lock.html">Input lock behavior</a> and <a href="auto-play.html">auto-play fallback</a>.</div>
-      </article>
+    <section class="section-block">
+      <div class="section-head"><h2>Related Controls</h2></div>
+      <div class="related-row">
+        <a class="tile" href="input-lock.html"><div class="tile-kicker">Control</div><h3>Input Lock</h3><p>No-admin lock behavior and lockdown timer.</p></a>
+        <a class="tile" href="auto-play.html"><div class="tile-kicker">Fallback</div><h3>Auto-Play</h3><p>Open a fallback URL when no video is sent.</p></a>
+        <a class="tile" href="settings-preview.html"><div class="tile-kicker">Preview</div><h3>Settings UI</h3><p>Mocked full-size settings page layout.</p></a>
+        <a class="tile" href="features.html"><div class="tile-kicker">Reference</div><h3>Deep Dive</h3><p>Complete behavior reference.</p></a>
+      </div>
     </section>
   </main>
 </body>

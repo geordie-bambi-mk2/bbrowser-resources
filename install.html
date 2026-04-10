@@ -2,65 +2,130 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <title>BambiBrowser+ v6.1 - Install</title>
+  <title>BambiBrowser+ v6.2 - Install</title>
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
   <nav class="site-nav">
     <a class="nav-brand" href="index.html">BambiBrowser+ Guide</a>
     <div class="nav-links">
-      <a href="index.html">Home</a><a href="install.html" class="active">Install</a><a href="player.html">Player</a><a href="boot.html">Boot</a><a href="usage.html">Usage</a><a href="features.html#install">Deep Dive</a>
+      <a href="index.html">Home</a>
+      <a href="install.html" class="active">Install</a>
+      <a href="player.html">Player</a>
+      <a href="boot.html">Boot</a>
+      <a href="usage.html">Usage</a>
+      <a href="features.html">Deep Dive</a>
     </div>
   </nav>
 
   <main class="wrap">
+    <div class="page-crumb"><a href="index.html">Home</a><span>›</span>Install</div>
+
     <section class="hero">
       <h1>Install The Extension</h1>
       <p>Set up BambiBrowser+ on any Chromium browser in under two minutes, then open the full settings tab from the popup cog.</p>
-      <div class="hero-meta">Version v6.1</div>
+      <div class="hero-meta">Version v6.2 · Step 1 of 4</div>
     </section>
 
-    <section class="layout">
-      <aside class="sidebar">
-        <div class="side-title">Setup Flow</div>
-        <ul class="side-list">
-          <li><a class="active" href="install.html">1. Load Extension</a></li>
-          <li><a href="player.html">2. Start Helper</a></li>
-          <li><a href="boot.html">3. Auto-start</a></li>
-          <li><a href="usage.html">4. Daily Usage</a></li>
-        </ul>
-      </aside>
-
-      <article class="panel">
-        <h2>Install Steps</h2>
-        <div class="grid-2">
-          <div class="card">
-            <h3>Browser Setup</h3>
-            <ol>
-              <li>Open <code>chrome://extensions/</code> (or equivalent).</li>
-              <li>Enable <strong>Developer mode</strong>.</li>
-              <li>Click <strong>Load unpacked</strong>.</li>
-              <li>Select this repo's <code>extension</code> folder.</li>
-            </ol>
-          </div>
-          <div class="card">
-            <h3>Post-install Checks</h3>
-            <ul>
-              <li>Pin BambiBrowser+ to the toolbar.</li>
-              <li>Open popup and confirm the compact status view appears.</li>
-              <li>Click the cog to open full-size settings in a tab.</li>
-            </ul>
-          </div>
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Browser Setup</h2>
+        <p>Load the unpacked extension into any Chromium-based browser.</p>
+      </div>
+      <div class="download-cta">
+        <div>
+          <div class="download-cta-title">Need the project files first?</div>
+          <div class="download-cta-meta">Direct download of the latest BambiBrowser_PlusPlus source archive from GitHub (main branch).</div>
         </div>
-        <div class="card">
-          <h3>Notes</h3>
-          <p>Unpacked extension warnings are expected in developer mode. They do not affect local functionality.</p>
-        </div>
-        <div class="footer">Next: <a href="player.html">Start the helper player</a>.</div>
-      </article>
+        <a class="download-cta-btn" href="https://github.com/geordie-bambi-mk2/BambiBrowser_PlusPlus/archive/refs/heads/main.zip" target="_blank" rel="noopener noreferrer">Download main.zip</a>
+      </div>
+      <div class="tile-grid">
+        <article class="tile static">
+          <div class="tile-kicker">Step 1</div>
+          <h3>Open Extensions</h3>
+          <p>Navigate to <code>chrome://extensions/</code> or your browser's equivalent extensions page.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">Step 2</div>
+          <h3>Developer Mode</h3>
+          <p>Toggle <strong>Developer mode</strong> on using the switch in the top-right corner of the page.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">Step 3</div>
+          <h3>Load Unpacked</h3>
+          <p>Click <strong>Load unpacked</strong> and select this repo's <code>extension/</code> folder.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">Step 4</div>
+          <h3>Pin &amp; Verify</h3>
+          <p>Pin the icon to the toolbar. Open the popup and confirm the compact status view appears.</p>
+        </article>
+      </div>
     </section>
+
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Post-Install Checks</h2>
+        <p>Confirm the extension loaded correctly before moving on.</p>
+      </div>
+      <div class="tile-grid two-up">
+        <article class="tile static">
+          <div class="tile-kicker">Popup</div>
+          <h3>Status View Loads</h3>
+          <p>Clicking the icon should show the compact status popup — helper state, monitor mode, input lock, and a playback section.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">Settings</div>
+          <h3>Cog Opens Full Tab</h3>
+          <p>Clicking the cog icon in the popup should open a full-size settings tab, not a cramped popup panel.</p>
+        </article>
+      </div>
+      <div class="callout">
+        Unpacked extension warnings in the browser toolbar are expected in developer mode. They do not affect local functionality.
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Continue Setup</h2>
+      </div>
+      <div class="related-row">
+        <a class="tile" href="player.html">
+          <div class="tile-kicker">Next — Step 2</div>
+          <h3>Start Helper</h3>
+          <p>Launch bambi_player.exe and connect the extension.</p>
+        </a>
+        <a class="tile" href="boot.html">
+          <div class="tile-kicker">Step 3</div>
+          <h3>Auto-start</h3>
+          <p>Run the helper automatically at login.</p>
+        </a>
+        <a class="tile" href="usage.html">
+          <div class="tile-kicker">Step 4</div>
+          <h3>Configure Usage</h3>
+          <p>Domains, input lock, and fallback settings.</p>
+        </a>
+        <a class="tile" href="features.html">
+          <div class="tile-kicker">Reference</div>
+          <h3>Deep Dive</h3>
+          <p>Full technical behavior in one page.</p>
+        </a>
+        <a class="tile" href="settings-preview.html">
+          <div class="tile-kicker">Preview</div>
+          <h3>Settings UI Mock</h3>
+          <p>Visual preview of how the full-size settings page is organized.</p>
+        </a>
+      </div>
+    </section>
+
+    <footer class="footer-block">
+      BambiBrowser+ v6.2 · Based on
+      <a href="https://github.com/sissy3city/BambiBrowser" target="_blank">BambiBrowser</a>
+      by sissy3city · Extended by
+      <a href="https://github.com/geordie-bambi-mk2" target="_blank">geordie-bambi-mk2</a>
+    </footer>
   </main>
 </body>
 </html>

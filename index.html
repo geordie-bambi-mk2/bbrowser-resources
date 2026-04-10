@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <title>BambiBrowser+ v6.1 - Guide Home</title>
+  <title>BambiBrowser+ v6.2 - Guide Home</title>
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
@@ -25,7 +25,7 @@
     <section class="hero hero-home">
       <h1>BambiBrowser+ Guide Hub</h1>
       <p>One place for setup, operations, and advanced behavior. The popup is now compact status-only, and settings live in a full browser tab for cleaner control.</p>
-      <div class="hero-meta">Version v6.1</div>
+      <div class="hero-meta">Version v6.2</div>
       <div class="hero-actions">
         <a class="hero-btn primary" href="install.html">Start Setup</a>
         <a class="hero-btn" href="features.html">Open Deep Dive</a>
@@ -63,7 +63,7 @@
 
     <section class="section-block">
       <div class="section-head">
-        <h2>What Changed In v6.1</h2>
+        <h2>What Changed In v6.2</h2>
         <p>Workflow improvements and better visibility.</p>
       </div>
       <div class="tile-grid two-up">
@@ -84,8 +84,8 @@
         </article>
         <article class="tile static">
           <div class="tile-kicker">Control</div>
-          <h3>Independent Input Lock</h3>
-          <p>Input lock no longer depends on multi-monitor mode and can be managed with lockdown timer.</p>
+          <h3>No-Admin Input Lock</h3>
+          <p>Input lock now uses low-level Windows hooks (WH_KEYBOARD_LL / WH_MOUSE_LL) — no elevation or admin rights needed.</p>
         </article>
       </div>
     </section>
@@ -104,11 +104,15 @@
           <h3>Single Deep-Dive</h3>
           <p>Long-form technical behavior and end-to-end lifecycle in one page.</p>
         </a>
+        <a class="path-card" href="settings-preview.html">
+          <h3>Settings Preview</h3>
+          <p>Visual mock of the full-size settings tab layout from the popup cog.</p>
+        </a>
       </div>
     </section>
 
     <footer class="footer-block">
-      BambiBrowser+ v6.1 · Based on
+      BambiBrowser+ v6.2 · Based on
       <a href="https://github.com/sissy3city/BambiBrowser" target="_blank">BambiBrowser</a>
       by sissy3city · Extended by
       <a href="https://github.com/geordie-bambi-mk2" target="_blank">geordie-bambi-mk2</a>

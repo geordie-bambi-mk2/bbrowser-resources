@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <title>BambiBrowser+ v6.1 - Feature Deep Dive</title>
+  <title>BambiBrowser+ v6.2 - Feature Deep Dive</title>
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
@@ -16,15 +16,18 @@
       <a href="player.html">Player</a>
       <a href="boot.html">Boot</a>
       <a href="usage.html">Usage</a>
+      <a href="settings-preview.html">Preview</a>
       <a class="active" href="features.html">Deep Dive</a>
     </div>
   </nav>
 
   <main class="wrap">
+    <div class="page-crumb"><a href="index.html">Home</a><span>></span>Deep Dive</div>
+
     <section class="hero">
       <h1>Feature Deep Dive</h1>
       <p>Detailed behavior reference for helper connectivity, hijack flow, input lock, fallback URL logic, and settings architecture.</p>
-      <div class="hero-meta">Version v6.1</div>
+      <div class="hero-meta">Version v6.2</div>
     </section>
 
     <section class="layout">
@@ -76,6 +79,7 @@
           <h3>Input Lock</h3>
           <ul>
             <li>Independent from multi-monitor mode.</li>
+            <li>Uses low-level keyboard/mouse hooks and does not require admin rights.</li>
             <li>Can be enabled manually or forced during lockdown timer.</li>
             <li>Lockdown blocks disabling until timer expiry.</li>
             <li>After expiry, setting remains enabled but becomes user-toggleable again.</li>
@@ -102,7 +106,7 @@
           </ul>
         </section>
 
-        <div class="footer">Related pages: <a href="usage.html">Usage</a>, <a href="input-lock.html">Input Lock</a>, <a href="auto-play.html">Auto-Play</a>.</div>
+        <div class="footer">Related pages: <a href="usage.html">Usage</a>, <a href="input-lock.html">Input Lock</a>, <a href="auto-play.html">Auto-Play</a>, <a href="settings-preview.html">Settings Preview</a>.</div>
       </article>
     </section>
   </main>
