@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <title>BambiBrowser+ v6.2 - Firefox Install</title>
+  <link rel="stylesheet" href="site.css">
+</head>
+<body>
+  <nav class="site-nav">
+    <a class="nav-brand" href="index.html">BambiBrowser+ Guide</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="install.html">Install (Chrome)</a>
+      <a href="install-firefox.html" class="active">Install (Firefox)</a>
+      <a href="player.html">Player</a>
+      <a href="boot.html">Boot</a>
+      <a href="usage.html">Usage</a>
+      <a href="features.html">Deep Dive</a>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <div class="page-crumb"><a href="index.html">Home</a><span>›</span>Install (Firefox)</div>
+
+    <section class="hero">
+      <h1>Install on Firefox</h1>
+      <p>BambiBrowser+ for Firefox is distributed as a signed <code>.xpi</code> file. Download it from the GitHub repo and install in one step — no developer mode needed.</p>
+      <div class="hero-meta">Version v6.2 · Firefox 140+</div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Download &amp; Install</h2>
+        <p>The extension is signed by Mozilla so regular Firefox accepts it permanently.</p>
+      </div>
+      <div class="tile-grid">
+        <article class="tile static">
+          <div class="tile-kicker">Step 1</div>
+          <h3>Get the .xpi file</h3>
+          <p>The signed <code>.xpi</code> is distributed via the Git repo. Download it from the <code>dist-firefox/</code> folder or clone/pull the repo to get the latest file.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">Step 2</div>
+          <h3>Open in Firefox</h3>
+          <p>Drag the <code>.xpi</code> file into any Firefox window, or use <strong>File → Open File</strong> and select it.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">Step 3</div>
+          <h3>Confirm Install</h3>
+          <p>Firefox will show a permissions prompt. Click <strong>Add</strong> to install. The extension persists across restarts.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">Step 4</div>
+          <h3>Pin &amp; Verify</h3>
+          <p>Click the extensions puzzle icon in the toolbar, find BambiBrowser+, and pin it. Open the popup to confirm the status view loads.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Post-Install Checks</h2>
+        <p>Confirm the extension is running correctly before moving on.</p>
+      </div>
+      <div class="tile-grid two-up">
+        <article class="tile static">
+          <div class="tile-kicker">Popup</div>
+          <h3>Status View Loads</h3>
+          <p>Clicking the icon should show the compact status popup — helper state, monitor mode, input lock, and playback section.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">Settings</div>
+          <h3>Cog Opens Full Tab</h3>
+          <p>Clicking the cog icon in the popup should open a full-size settings tab.</p>
+        </article>
+      </div>
+      <div class="callout">
+        Firefox 140 or newer is required. If you're on an older version, update Firefox before installing.
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Updating the Extension</h2>
+        <p>Firefox does not auto-update unlisted extensions. When a new version is released:</p>
+      </div>
+      <div class="tile-grid two-up">
+        <article class="tile static">
+          <div class="tile-kicker">Option A</div>
+          <h3>Install over existing</h3>
+          <p>Get the new <code>.xpi</code> from the Git repo (<code>dist-firefox/</code>) and drag it into Firefox. It will replace the old version and keep your settings.</p>
+        </article>
+        <article class="tile static">
+          <div class="tile-kicker">Option B</div>
+          <h3>Remove then reinstall</h3>
+          <p>Go to <code>about:addons</code>, remove BambiBrowser+, then install the new <code>.xpi</code> fresh.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section-block">
+      <div class="section-head">
+        <h2>Continue Setup</h2>
+      </div>
+      <div class="related-row">
+        <a class="tile" href="player.html">
+          <div class="tile-kicker">Next — Step 2</div>
+          <h3>Start Helper</h3>
+          <p>Launch bambi_player.exe and connect the extension.</p>
+        </a>
+        <a class="tile" href="install.html">
+          <div class="tile-kicker">Wrong browser?</div>
+          <h3>Chrome / Edge / Brave</h3>
+          <p>See the Chromium install guide instead.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
