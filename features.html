@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <title>BambiBrowser+ v6.2 - Feature Deep Dive</title>
+  <title>BambiBrowser+ v6.3 - Feature Deep Dive</title>
   <link rel="stylesheet" href="site.css">
 </head>
 <body>
@@ -12,7 +12,8 @@
     <a class="nav-brand" href="index.html">BambiBrowser+ Guide</a>
     <div class="nav-links">
       <a href="index.html">Home</a>
-      <a href="install.html">Install</a>
+      <a href="install.html">Install (Chrome)</a>
+      <a href="install-firefox.html">Install (Firefox)</a>
       <a href="player.html">Player</a>
       <a href="boot.html">Boot</a>
       <a href="usage.html">Usage</a>
@@ -27,7 +28,7 @@
     <section class="hero">
       <h1>Feature Deep Dive</h1>
       <p>Detailed behavior reference for helper connectivity, hijack flow, input lock, fallback URL logic, and settings architecture.</p>
-      <div class="hero-meta">Version v6.2</div>
+      <div class="hero-meta">Version v6.3</div>
     </section>
 
     <section class="layout">
@@ -39,6 +40,7 @@
           <li><a href="#domains">Domain Modes</a></li>
           <li><a href="#input-lock">Input Lock</a></li>
           <li><a href="#auto-play">Auto-Play Fallback</a></li>
+          <li><a href="#time-limit">Video Time Limit</a></li>
           <li><a href="#status-surface">Status Surface</a></li>
         </ul>
       </aside>
@@ -93,6 +95,16 @@
             <li>If idle timeout is reached without VLC send, fallback URL opens.</li>
             <li>Successful VLC send cancels fallback for active session context.</li>
             <li>Best used with fallback pages on allowed domains.</li>
+          </ul>
+        </section>
+
+        <section id="time-limit" class="card">
+          <h3>Video Time Limit</h3>
+          <ul>
+            <li><strong>Skip videos that exceed limit:</strong> if the browser knows the video duration at detection time, it is never sent to VLC. If the duration was unknown (NaN), VLC is polled every 1.5 s for the real length and stopped within seconds if it exceeds the limit.</li>
+            <li><strong>Stop &amp; exit:</strong> VLC is stopped and state is reset exactly at the configured minute mark.</li>
+            <li><strong>Soft-unlock:</strong> input lock is released and a beep plays at the limit; VLC continues playing.</li>
+            <li>A hard-stop fallback fires at the time limit for auto-skip if VLC never reports a duration.</li>
           </ul>
         </section>
 
